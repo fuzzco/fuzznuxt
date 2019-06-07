@@ -1,0 +1,117 @@
+@import 'easings';
+
+// Sass constants
+$white: #ffffff;
+$black: #000000;
+// (theme colors here)
+
+$font-body: 'Neurial';
+$font-header: 'SpaceGrotesk';
+$font-serif: 'Artifex';
+
+$desktop-padding: 75px;
+$header-height: 280px;
+
+// Mobile versions
+$mobile-padding: 15px;
+$mobile-header-height: 100px;
+$mobile-h2-font-size: 30px;
+$mobile-body-font-size: 14px;
+$title-mobile-size: 28px;
+$mobile-vertical-margin: 50px;
+
+// Breakpoints
+$gt-cinema: 'only screen and (min-width: 1800px)';
+$lt-desktop: 'only screen and (max-width: 1100px)';
+$lt-phone: 'only screen and (max-width: 750px)';
+$lt-phone-landscape: 'only screen and (max-width: 750px) and (orientation: landscape)';
+
+// mixins
+@mixin fill($position: absolute) {
+    position: #{$position};
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+@mixin cover {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+@mixin contain {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+@mixin scale-type($size) {
+    font-size: #{$size}px;
+    font-size: #{$size / 1200 * 100}vw;
+}
+@mixin no-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+@mixin button-reset {
+    @include no-select;
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1;
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    font-family: $font-body;
+    border-radius: 0;
+    font-weight: inherit;
+    font-size: inherit;
+    padding: 0;
+    color: inherit;
+}
+
+// Breakpoints
+// ---------------------------------------------
+$breakpoints: (
+    xl: (
+        min-width: 1100px
+    ),
+    l: (
+        max-width: 992px
+    ),
+    m: (
+        max-width: 840px
+    ),
+    s: (
+        max-width: 700px
+    ),
+    xs: (
+        max-width: 480px
+    )
+);
+@mixin bp($name) {
+    $value: map-get($breakpoints, $name);
+    @if map-has-key($breakpoints, $name) {
+        @media #{inspect(map-get($breakpoints, $name))} {
+            @content;
+        }
+    } @else {
+        @warn "The '#{$name}' breakpoint is not defined. "
+        + "Please make sure it is defined in the global.scss '$breakpoint' map.";
+    }
+}
+
+@mixin smaller-than($size) {
+    @media (max-width: $size) {
+        @content;
+    }
+}
+@mixin bigger-than($size) {
+    @media (min-width: $size) {
+        @content;
+    }
+}
