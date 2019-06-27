@@ -3,6 +3,8 @@
 body {
     --container-padding: 50px;
     --header-height: 150px;
+    --black: #{$black};
+    --white: #{$white};
     background-color: $white;
     font-family: $font-body;
     margin: 0;
@@ -13,14 +15,8 @@ body {
     text-rendering: optimizeLegibility !important;
     overflow-x: hidden;
 }
-a {
-}
-// Mobile
-@media #{$lt-phone} {
-    body {
-        --container-padding: #{$mobile-padding};
-        --header-height: #{$mobile-header-height};
-    }
+button {
+    @include button-reset;
 }
 h1,
 h2,
@@ -45,7 +41,23 @@ a {
     background: rgba($black, 0.3);
 }
 
+// Mobile
+@media #{$lt-phone} {
+    body {
+        --container-padding: #{$mobile-padding};
+        --header-height: #{$mobile-header-height};
+    }
+}
+
 // resets
+.content-reset {
+    & > *:first-child {
+        margin-top: 0;
+    }
+    & > *:last-child {
+        margin-bottom: 0;
+    }
+}
 .button-reset {
     @include button-reset;
 }
@@ -55,23 +67,8 @@ a {
     padding: 0;
 }
 .input-reset {
-    background-color: transparent;
-    appearance: none;
-    font-family: $font-body;
-    border-radius: 0;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1;
-    border: none;
-    color: inherit;
-
-    &:focus {
-        outline: none;
-    }
+    @include input-reset;
 }
-// ::-webkit-scrollbar {
-//   display: none;
-// }
 
 // entry styling
 .entry {

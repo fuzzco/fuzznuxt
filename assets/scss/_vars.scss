@@ -1,8 +1,8 @@
 @import 'easings';
 
 // Sass constants
-$white: #ffffff;
-$black: #000000;
+$white: #fff;
+$black: #000;
 // (theme colors here)
 
 $font-body: 'Neurial';
@@ -66,12 +66,27 @@ $lt-phone-landscape: 'only screen and (max-width: 750px) and (orientation: lands
     background-color: transparent;
     cursor: pointer;
     outline: none;
-    font-family: $font-body;
+    font-family: inherit;
     border-radius: 0;
     font-weight: inherit;
     font-size: inherit;
     padding: 0;
     color: inherit;
+}
+@mixin input-reset {
+    background-color: transparent;
+    appearance: none;
+    font-family: inherit;
+    border-radius: 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1;
+    border: none;
+    color: inherit;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 // Breakpoints
