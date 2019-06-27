@@ -39,8 +39,6 @@ export const actions = {
         return false
     },
     FETCH_BY_SLUG: async ({ commit, state }, { type, slug }) => {
-        console.log(type, slug)
-
         // check if we already have data to return immediately
         if (state.pageData[`${type}/${slug}`])
             return state.pageData[`${type}/${slug}`]
