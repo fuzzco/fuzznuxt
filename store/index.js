@@ -40,8 +40,8 @@ export const actions = {
     },
     FETCH_BY_SLUG: async ({ commit, state }, { type, slug }) => {
         // check if we already have data to return immediately
-        if (state.pageData[`${type}/${slug}`])
-            return state.pageData[`${type}/${slug}`]
+        if (state.pageData[`${type}/${slug || 'front-page'}`])
+            return state.pageData[`${type}/${slug || 'front-page'}`]
 
         // query Prismic
         const doc = await fetchByType({ type, slug })
@@ -49,7 +49,7 @@ export const actions = {
         console.log('retrieved', doc)
         if (doc) {
             commit('SET_PAGE_DATA', {
-                key: `${type}/${slug}`,
+                key: `${type}/${slug || 'front-page'}`,
                 data: doc
             })
 
