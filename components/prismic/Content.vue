@@ -16,11 +16,20 @@ export default {
         content: {
             type: Array,
             default: () => []
+        },
+        asText: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
         formattedContent() {
-            return PrismicDOM.RichText.asHtml(this.content, linkResolver) || ''
+            return (
+                PrismicDOM.RichText[this.asText ? 'asText' : 'asHtml'](
+                    this.content,
+                    linkResolver
+                ) || ''
+            )
         }
     },
     async mounted() {
