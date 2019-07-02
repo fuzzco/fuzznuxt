@@ -5,7 +5,8 @@ import Vue from 'vue'
 
 export const state = () => {
     return {
-        pageData: {}
+        pageData: {},
+        description: ''
     }
 }
 
@@ -15,6 +16,9 @@ export const mutations = {
     },
     REMOVE_PAGE_DATA: (state, key) => {
         Vue.delete(state.pageData, key)
+    },
+    SET_DESCRIPTION: (state, description) => {
+        state.description = description
     }
 }
 

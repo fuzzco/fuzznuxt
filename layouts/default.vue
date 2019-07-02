@@ -1,5 +1,7 @@
 <template>
     <div :class="classes" v-full-height.min>
+        <div id="description" v-html="$store.state.description" />
+
         <site-header />
         <div class="site-container">
             <transition name="fade" mode="out-in">
@@ -48,6 +50,10 @@ export default {
 .container {
     display: flex;
     flex-direction: column;
+
+    #description {
+        display: none;
+    }
 
     .site-container {
         flex: 1;

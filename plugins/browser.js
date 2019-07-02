@@ -10,6 +10,7 @@ import isTouchDevice from 'is-touch-device'
 import qs from 'qs'
 import { autoBlur } from 'auto-blur'
 import setupMousePositionWatcher from '~/plugins/mouse-position'
+import head from '~/mixins/head'
 
 // Fuzzco elements
 import inView from '@fuzzco/in-view'
@@ -92,6 +93,7 @@ export default async ({ store, route }, inject) => {
 
     // Register mixins
     Vue.mixin(inView)
+    Vue.mixin(head)
 
     // autoblur
     autoBlur()

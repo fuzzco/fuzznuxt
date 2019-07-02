@@ -28,6 +28,59 @@ $ npm run generate
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
 
+## SEO Setup
+
+This template uses the following structure in Prismic on the global site settings and each custom page type:
+
+```
+"SEO" : {
+    "seo_title" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Title",
+        "placeholder" : "Page title"
+      }
+    },
+    "seo_description" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Description",
+        "placeholder" : "Page description"
+      }
+    },
+    "seo_image" : {
+      "type" : "Image",
+      "config" : {
+        "constraint" : { },
+        "thumbnails" : [ {
+          "name" : "Small",
+          "width" : 450,
+          "height" : null
+        } ],
+        "label" : "Image"
+      }
+    }
+```
+
+On each page-level component, use the `seo` lib:
+
+```html
+<script>
+    import seo from '~/libs/seo'
+
+    export default {
+        async asyncData(context){
+            const found = // populate this var with your page's data
+            const fallback = // populate this var with the site's fallback data
+            return seo(found, fallback)
+            // == { seoTitle, seoDescription, seoImage }
+        }
+    }
+</script>
+```
+
+This will combine with the globally-included `head` mixin (`~/mixins/head`) to populate SEO fields for each page.
+
 ## Deployment
 
 To set up Heroku, you can follow the [Heroku instructions](https://devcenter.heroku.com/articles/git) or:
