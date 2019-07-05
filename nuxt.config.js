@@ -66,6 +66,12 @@ module.exports = {
     },
 
     /*
+     * Server
+     */
+    // force SSL
+    serverMiddleware: ['redirect-ssl'],
+
+    /*
      * Build settings
      */
     build: {

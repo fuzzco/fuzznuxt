@@ -57,6 +57,7 @@
         "prismic-javascript": "^2.0.2",
         "prompts": "^2.1.0",
         "qs": "^6.7.0",
+        "redirect-ssl": "^1.4.0",
         "rellax": "^1.9.1",
         "screenfull": "^4.2.0",
         "simplex-noise": "^2.4.0",
