@@ -19,6 +19,9 @@ export const mutations = {
     },
     SET_DESCRIPTION: (state, description) => {
         state.description = description
+    },
+    SET_BODY_SCROLL: (state, toScroll) => {
+        document.body.classList[toScroll ? 'remove' : 'add']('scroll-prevented')
     }
 }
 
