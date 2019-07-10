@@ -28,6 +28,16 @@ $ npm run generate
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
 
+## Included
+
+### Libs
+
+(TODO)
+
+### Mixins
+
+(TODO)
+
 ## SEO Setup
 
 This template uses the following structure in Prismic on the global site settings and each custom page type:
