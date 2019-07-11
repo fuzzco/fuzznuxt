@@ -2,6 +2,14 @@
 
 > Fuzzco Nuxt boilerplate.
 
+1. [Installation](#installation)
+1. [Flow](#flow)
+1. [Included](#included)
+    1. [Libs](#libs)
+    1. [Mixins](#mixins)
+1. [SEO](#seo-setup)
+1. [Deployment](#deployment)
+
 ## Installation
 
 1. Download/clone this repo or [degit](https://github.com/Rich-Harris/degit): `degit fuzzco/fuzznuxt your-project-name`.
@@ -9,26 +17,34 @@
 1. Copy `.env.example` as `.env` and add the appropriate Prismic URL.
 1. `npm run dev`
 
-## Build Setup
+## Flow
 
-```bash
-# install dependencies
-$ npm install
+The first thing to run in the template is `plugins/bootstrap.js` - this will be run server-side, so anything you need guaranteed on load should be retrieved here.
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+`plugins/browser.js` runs next. Usually, outside components and browser-dependent events (window resizing, font loading, etc) are registered here, but it's possible to set up anything you want guaranteed to run client-side in this script.
 
-# build for production and launch server
-$ npm run build
-$ npm start
+From there, Nuxt's normal [layout](https://nuxtjs.org/api/pages-layout/) and [page](https://nuxtjs.org/guide/views#pages) rules apply.
 
-# generate static project
-$ npm run generate
+**The one notable exception** is the `components` directory. Thanks to `plugins/global-components.js`, every Vue file in the `components` directory will automatically register globally. Kebab-case rules will apply to directory and PascalCase names - for example, this structure:
+
+```
+| ContactForm.vue
+| site/
+| --- Header.vue
+| --- footer.vue
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+will register the following components:
+
+-   `contact-form`
+-   `site-header`
+-   `site-footer`
+
+**Additionally,** the contents of `assets/scss/_vars.scss` will automatically be `@include`d in every Vue component on the site.
 
 ## Included
+
+This boilerplate comes with several built-in libraries, filters, utilities, and plugins.
 
 ### Libs
 
