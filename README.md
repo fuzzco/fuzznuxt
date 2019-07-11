@@ -1,6 +1,6 @@
 # Fuzznuxt
 
-> Fuzzco Nuxt boilerplate.
+Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) sites.
 
 1. [Installation](#installation)
 1. [Flow](#flow)
@@ -23,24 +23,24 @@ The first thing to run in the template is `plugins/bootstrap.js` - this will be 
 
 `plugins/browser.js` runs next. Usually, outside components and browser-dependent events (window resizing, font loading, etc) are registered here, but it's possible to set up anything you want guaranteed to run client-side in this script.
 
-From there, Nuxt's normal [layout](https://nuxtjs.org/api/pages-layout/) and [page](https://nuxtjs.org/guide/views#pages) rules apply.
+From there, Nuxt's normal [layout](https://nuxtjs.org/api/pages-layout/) and [page](https://nuxtjs.org/guide/views#pages) rules apply. There are **two notable exceptions:**
 
-**The one notable exception** is the `components` directory. Thanks to `plugins/global-components.js`, every Vue file in the `components` directory will automatically register globally. Kebab-case rules will apply to directory and PascalCase names - for example, this structure:
+-   The `components` directory: Thanks to `plugins/global-components.js`, every Vue file in the `components` directory will automatically register globally. Kebab-case rules will apply to directory and PascalCase names - for example, this structure:
 
-```
-| ContactForm.vue
-| site/
-| --- Header.vue
-| --- footer.vue
-```
+    ```
+    | ContactForm.vue
+    | site/
+    | --- Header.vue
+    | --- footer.vue
+    ```
 
-will register the following components:
+    will register the following components:
 
--   `contact-form`
--   `site-header`
--   `site-footer`
+    -   `contact-form`
+    -   `site-header`
+    -   `site-footer`
 
-**Additionally,** the contents of `assets/scss/_vars.scss` will automatically be `@include`d in every Vue component on the site.
+-   `_vars.scss`: Thanks to the [style-resources-module](https://github.com/nuxt-community/style-resources-module), the contents of `assets/scss/_vars.scss` will automatically be `@include`d in every Vue component on the site.
 
 ## Included
 
@@ -48,7 +48,29 @@ This boilerplate comes with several built-in libraries, filters, utilities, and 
 
 ### Libs
 
-(TODO)
+-   Prismic
+
+    Contains several helper functions for serializing data from Prismic. Most of these are handled internally.
+
+*   SEO
+
+    See [SEO](#seo) below.
+
+*   Utilities
+
+    Contains common helper functions. Usage:
+
+    `import { wait } from '~/libs/utils'`
+
+    Functions:
+
+    | Name       | Parameters                          | Notes                                                                                             |
+    | ---------- | ----------------------------------- | ------------------------------------------------------------------------------------------------- |
+    | `bezier`   | `(p0, p1, p2, p3)`                  | Construct a bezier curve from four points. See [here](https://cubic-bezier.com) for a visualizer. |
+    | `lerp`     | `(from, to, alpha)`                 | Lerp between `from` and `to`. `alpha` should be between 0 and 1.                                  |
+    | `scrollTo` | `(el, duration = 1000, offset = 0)` | Scroll to `el` (plus `offset`) over `duration` ms. Awaitable. Fails silently if no `el`.          |
+    | `scrollUp` | `(duration = 1000)`                 | Scroll to the top of the page over `duration` ms.                                                 |
+    | `wait`     | `(time = 1000)`                     | Wait `time` ms. Awaitable.                                                                        |
 
 ### Mixins
 
