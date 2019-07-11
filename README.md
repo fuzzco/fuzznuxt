@@ -48,33 +48,79 @@ This boilerplate comes with several built-in libraries, filters, utilities, and 
 
 ### Libs
 
--   Prismic
+#### Prismic
 
-    Contains several helper functions for serializing data from Prismic. Most of these are handled internally.
+Contains several helper functions for serializing data from Prismic. Most of these are handled internally.
 
-*   SEO
+#### SEO
 
-    See [SEO](#seo) below.
+See [SEO](#seo) below.
 
-*   Utilities
+#### Utilities
 
-    Contains common helper functions. Usage:
+Contains common helper functions. Usage:
 
-    `import { wait } from '~/libs/utils'`
+`import { wait } from '~/libs/utils'`
 
-    Functions:
+Functions:
 
-    | Name       | Parameters                          | Notes                                                                                             |
-    | ---------- | ----------------------------------- | ------------------------------------------------------------------------------------------------- |
-    | `bezier`   | `(p0, p1, p2, p3)`                  | Construct a bezier curve from four points. See [here](https://cubic-bezier.com) for a visualizer. |
-    | `lerp`     | `(from, to, alpha)`                 | Lerp between `from` and `to`. `alpha` should be between 0 and 1.                                  |
-    | `scrollTo` | `(el, duration = 1000, offset = 0)` | Scroll to `el` (plus `offset`) over `duration` ms. Awaitable. Fails silently if no `el`.          |
-    | `scrollUp` | `(duration = 1000)`                 | Scroll to the top of the page over `duration` ms.                                                 |
-    | `wait`     | `(time = 1000)`                     | Wait `time` ms. Awaitable.                                                                        |
+| Name       | Parameters                          | Notes                                                                                             |
+| ---------- | ----------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `bezier`   | `(p0, p1, p2, p3)`                  | Construct a bezier curve from four points. See [here](https://cubic-bezier.com) for a visualizer. |
+| `lerp`     | `(from, to, alpha)`                 | Lerp between `from` and `to`. `alpha` should be between 0 and 1.                                  |
+| `scrollTo` | `(el, duration = 1000, offset = 0)` | Scroll to `el` (plus `offset`) over `duration` ms. Awaitable. Fails silently if no `el`.          |
+| `scrollUp` | `(duration = 1000)`                 | Scroll to the top of the page over `duration` ms.                                                 |
+| `wait`     | `(time = 1000)`                     | Wait `time` ms. Awaitable.                                                                        |
 
 ### Mixins
 
-(TODO)
+#### Head
+
+Automatically included on every component. Will set SEO values and page title appropriately - see [SEO](#seo) below.
+
+#### Hovering
+
+Contains hover/focus enter and exit event listeners and adds the `hovering` property to the component's data.
+
+#### prisImg
+
+Globally included in `plugins/bootstrap.js`. Filter function for Prismic images. Use, for example, with [super-image](https://github.com/fuzzco/super-image):
+
+`<super-image v-bind="prisImg(image)"/>`
+
+#### Rect
+
+Keeps track of an element's `boundingClientRect` via the `clientRect` data field. Also makes `rectThrottle` available on data to control how often, in ms, the client rect will update,
+
+#### Slideshow
+
+Adds several slideshow functions and properties. Sets left/right arrow key listeners and a [hammerjs](https://hammerjs.github.io/) swipe listener. Requires `slides` to be set manually - for example:
+
+```html
+<script>
+    import slideshow from '~/mixins/slideshow'
+
+    export default {
+        mixins: [slideshow],
+        data() {
+            return {
+                slides: [
+                    /* your slides here */
+                ]
+            }
+        }
+    }
+</script>
+```
+
+| Name                                | Type     | Info                                                                               |
+| ----------------------------------- | -------- | ---------------------------------------------------------------------------------- |
+| `goToIndex(index, stopAuto = true)` | Function | Go to the given index. Will wrap correctly. Optionally stop autoplay.              |
+| `index`                             | Number   | The wrapped index of the current slide. Will be between 0 and `slides.length - 1`. |
+| `interval`                          | Number   | The number of ms between each slide on autoplay. Default 5000.                     |
+| `next(stopAuto = true)`             | Function | Go to the next slide. Optionally stop autoplay.                                    |
+| `prev(stopAuto = true)`             | Function | Go to the previous slide. Optionally stop autoplay.                                |
+| `stopAuto()`                        | Function | Stop autoplay.                                                                     |
 
 ## SEO Setup
 
