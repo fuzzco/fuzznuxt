@@ -12,6 +12,9 @@ module.exports = {
      * Head
      */
     head: {
+        htmlAttrs: {
+            lang: 'en'
+        },
         title: 'Fuzznuxt',
         meta: [
             { charset: 'utf-8' },
