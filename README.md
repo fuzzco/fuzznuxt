@@ -185,3 +185,12 @@ To set up Heroku, you can follow the [Heroku instructions](https://devcenter.her
 Once Heroku is set up and you want to deploy:
 
 1. `npm run deploy`
+
+On Heroku's end, remember to set these environment variables:
+
+```
+HOST                    0.0.0.0
+NODE_ENV                production
+NPM_CONFIG_PRODUCTION   false
+PRISMIC_URL             (your Prismic API URL)
+```
