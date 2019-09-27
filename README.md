@@ -3,6 +3,7 @@
 Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) sites.
 
 1. [Installation](#installation)
+    1. [Fonts](#fonts)
 1. [Flow](#flow)
 1. [Included](#included)
     1. [Libs](#libs)
@@ -16,6 +17,15 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
 1. `npm install`
 1. Copy `.env.example` as `.env` and add the appropriate Prismic URL.
 1. `npm run dev`
+
+### Fonts
+
+Fuzznuxt comes with a script to make font preparation easier.
+
+1. Select all formats, then drag and drop all fonts you want on your site to the uploader on [onlinefontconverter](https://onlinefontconverter.com).
+1. Select "Download all attachments".
+1. Drag the downloaded `arcive.zip` to the root directory of your Fuzznuxt project.
+1. Run `npm run fonts`. This will execute `bash/fonts.sh`, which will unzip and organize the fonts from the `arcive.zip` file into the `static/fonts` folder and remove the `arcive.zip` file.
 
 ## Flow
 

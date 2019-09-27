@@ -1,6 +1,6 @@
 {
     "name": "fuzznuxt",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "Fuzzco Nuxt boilerplate.",
     "author": "Fuzzco",
     "private": true,
@@ -11,6 +11,7 @@
         "generate": "nuxt generate",
         "test": "node test",
         "heroku-postbuild": "npm run build",
+        "fonts": "sh bash/fonts.sh",
         "deploy": "git push heroku master"
     },
     "prettier": {
