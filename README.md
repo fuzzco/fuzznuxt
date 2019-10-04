@@ -190,7 +190,7 @@ This will combine with the globally-included `head` mixin (`~/mixins/head`) to p
 To set up Heroku, you can follow the [Heroku instructions](https://devcenter.heroku.com/articles/git) or:
 
 1. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
-1. `heroku create`
+1. `heroku create your-app-name`
 
 Once Heroku is set up and you want to deploy:
 
