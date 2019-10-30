@@ -50,6 +50,25 @@ From there, Nuxt's normal [layout](https://nuxtjs.org/api/pages-layout/) and [pa
     -   `site-header`
     -   `site-footer`
 
+    To create async components in the `components` folder, end the component's name with `.async.vue` and register manually. For example, in the following contents of `~/components/`:
+
+    ```
+    | site/
+    | --- NormalComponent.vue
+    | --- LargeComponent.async.vue
+    ```
+
+    `site-normal-component` will automatically register globally, but `site-large-component` will need to be manually registered, ideally asynchronously:
+
+    ```js
+    export default {
+        components: {
+            'large-component': () =>
+                import('~/components/site/LargeComponent.async.vue')
+        }
+    }
+    ```
+
 -   `_vars.scss`: Thanks to the [style-resources-module](https://github.com/nuxt-community/style-resources-module), the contents of `assets/scss/_vars.scss` will automatically be `@include`d in every Vue component on the site.
 
 ## Included
