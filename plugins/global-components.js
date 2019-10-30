@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import _kebabCase from 'lodash/kebabCase'
+import { kebabCase as _kebabCase } from 'lodash'
 
 // globally register everything in the /components folder
 export default () => {

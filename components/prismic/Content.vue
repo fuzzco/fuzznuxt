@@ -8,7 +8,7 @@
 
 <script>
 import linkResolver from '~/libs/prismic/linkResolver'
-import PrismicDOM from 'prismic-dom'
+import { RichText } from 'prismic-dom'
 import fitvids from 'fitvids'
 
 export default {
@@ -25,7 +25,7 @@ export default {
     computed: {
         formattedContent() {
             return (
-                PrismicDOM.RichText[this.asText ? 'asText' : 'asHtml'](
+                RichText[this.asText ? 'asText' : 'asHtml'](
                     this.content,
                     linkResolver
                 ) || ''

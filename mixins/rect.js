@@ -1,4 +1,4 @@
-import _throttle from 'lodash/throttle'
+import { throttle as _throttle } from 'lodash'
 
 export default {
     data() {

@@ -1,14 +1,14 @@
-import prismicDOM from 'prismic-dom'
+import { RichText, Link } from 'prismic-dom'
 import linkResolver from './linkResolver'
 
-const Elements = prismicDOM.RichText.Elements
+const Elements = RichText.Elements
 
 export default function(type, element, content, children) {
     // Generate links to Prismic Documents as <router-link> components
     // Present by default, it is recommended to keep this
     if (type === Elements.hyperlink) {
         let result = ''
-        const url = prismicDOM.Link.url(element.data, linkResolver)
+        const url = Link.url(element.data, linkResolver)
 
         if (element.data.link_type === 'Document') {
             result = `<router-link to="${url}">${content}</router-link>`
@@ -28,7 +28,7 @@ export default function(type, element, content, children) {
             ''}" copyright="${element.copyright || ''}">`
 
         if (element.linkTo) {
-            const url = prismicDOM.Link.url(element.linkTo, linkResolver)
+            const url = Link.url(element.linkTo, linkResolver)
 
             if (element.linkTo.link_type === 'Document') {
                 result = `<router-link to="${url}">${result}</router-link>`

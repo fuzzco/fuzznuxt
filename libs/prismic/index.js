@@ -1,4 +1,4 @@
-import _sampleSize from 'lodash/sampleSize'
+import { sampleSize as _sampleSize } from 'lodash'
 import Prismic from 'prismic-javascript'
 
 // helper to init API

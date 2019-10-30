@@ -1,7 +1,7 @@
 const backstop = require('backstopjs')
 const Prismic = require('prismic-javascript')
 require('dotenv').config()
-const _get = require('lodash/get')
+const { get } = require('lodash')
 const { spawn, execSync } = require('child_process')
 const colors = require('colors')
 const config = require('./config')
@@ -24,8 +24,8 @@ const getSlugs = async () => {
     const api = await getApi()
 
     const res = await api.query('', { pageSize: 100 })
-    const results = _get(res, 'results', [])
-    return (slugs = results.map(page => _get(page, 'uid', '')).filter(Boolean))
+    const results = get(res, 'results', [])
+    return (slugs = results.map(page => get(page, 'uid', '')).filter(Boolean))
 }
 
 // start server

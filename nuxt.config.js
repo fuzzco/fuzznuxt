@@ -78,11 +78,11 @@ module.exports = {
      * Build settings
      */
     build: {
-        vendor: ['lodash/get', 'lodash/throttle', 'popmotion'],
         plugins: [
             new webpack.ProvidePlugin({
-                _get: 'lodash/get'
+                // _get: 'lodash/get'
             })
-        ]
+        ],
+        analyze: true
     }
 }

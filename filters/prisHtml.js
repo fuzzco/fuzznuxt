@@ -1,7 +1,7 @@
 import linkResolver from '~/libs/prismic/linkResolver'
-import PrismicDOM from 'prismic-dom'
+import { RichText } from 'prismic-dom'
 
 export default value => {
     if (!value) return ''
-    return PrismicDOM.RichText.asHtml(value, linkResolver) || ''
+    return RichText.asHtml(value, linkResolver) || ''
 }

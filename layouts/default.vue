@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import _kebabCase from 'lodash/kebabCase'
+import { kebabCase as _kebabCase } from 'lodash'
 
 export default {
     data() {

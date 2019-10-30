@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import kebabCase from 'lodash/kebabCase'
+import { kebabCase } from 'lodash'
 
 export default {
     props: {

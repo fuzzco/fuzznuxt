@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import _camelCase from 'lodash/camelCase'
+import { camelCase as _camelCase } from 'lodash'
 
 export default () => {
     // globally register everything in the /filters folder

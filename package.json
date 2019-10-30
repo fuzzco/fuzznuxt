@@ -20,6 +20,7 @@
         "singleQuote": true
     },
     "dependencies": {
+        "@babel/core": "7.6.4",
         "@fuzzco/font-loader": "^1.0.2",
         "@fuzzco/fragment-shader": "^1.1.0",
         "@fuzzco/in-view": "^1.2.2",
