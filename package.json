@@ -19,6 +19,9 @@
         "semi": false,
         "singleQuote": true
     },
+    "engines": {
+        "node": "9.11.2"
+    },
     "dependencies": {
         "@babel/core": "7.6.4",
         "@fuzzco/font-loader": "^1.0.2",
