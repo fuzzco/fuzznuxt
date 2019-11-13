@@ -80,7 +80,7 @@ module.exports = {
     build: {
         plugins: [
             new webpack.ProvidePlugin({
-                // _get: 'lodash/get'
+                _get: 'lodash/get'
             })
         ],
         analyze: true
