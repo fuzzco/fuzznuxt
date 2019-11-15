@@ -10,6 +10,8 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
     1. [Mixins](#mixins)
 1. [SEO](#seo-setup)
 1. [Deployment](#deployment)
+    1. [Netlify](#netlify)
+    1. [Heroku](#heroku)
 
 ## Installation
 
@@ -205,6 +207,23 @@ On each page-level component, use the `seo` lib:
 This will combine with the globally-included `head` mixin (`~/mixins/head`) to populate SEO fields for each page.
 
 ## Deployment
+
+### Netlify
+
+To set up a static site with Netlify, [connect your repo to Netlify](https://docs.netlify.com/configure-builds/repo-permissions-linking/) and set the deploy settings to:
+
+```
+Build command           npm run generate
+Publish directory       dist
+```
+
+and the environment variables to:
+
+```
+PRISMIC_URL             (your Prismic API URL)
+```
+
+### Heroku
 
 To set up Heroku, you can follow the [Heroku instructions](https://devcenter.heroku.com/articles/git) or:
 
