@@ -82,7 +82,7 @@ module.exports = {
             new webpack.ProvidePlugin({
                 _get: 'lodash/get'
             })
-        ],
-        analyze: true
+        ]
+        // analyze: true
     }
 }
