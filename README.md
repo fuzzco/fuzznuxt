@@ -195,9 +195,9 @@ On each page-level component, use the `seo` lib:
 
     export default {
         async asyncData(context){
-            const found = // populate this var with your page's data
-            const fallback = // populate this var with the site's fallback data
-            return seo(found, fallback)
+            const found = // page data that includes data from the above template
+            const fallback = // the site's fallback data includes data from the above template
+            return seo(found, fallback, store)
             // == { seoTitle, seoDescription, seoImage }
         }
     }
