@@ -18,12 +18,12 @@ export default {
     },
     methods: {
         onHoverStart() {
-            if (!this.$store.getters['browser/isMobile']) {
+            if (!this.$device.isMobile) {
                 this.hovering = true
             }
         },
         onHoverStop() {
-            if (!this.$store.getters['browser/isMobile']) {
+            if (!this.$device.isMobile) {
                 this.hovering = false
             }
         }

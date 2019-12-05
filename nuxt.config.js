@@ -59,7 +59,7 @@ module.exports = {
     /*
      * Style Resources
      */
-    modules: ['@nuxtjs/style-resources'],
+    modules: ['@nuxtjs/style-resources', '@nuxtjs/device'],
 
     /*
      * Router

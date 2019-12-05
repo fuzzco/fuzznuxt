@@ -18,13 +18,10 @@ import { kebabCase as _kebabCase } from 'lodash'
 export default {
     data() {
         return {
-            isTouch: false,
             isActive: false
         }
     },
     async mounted() {
-        this.isTouch = this.$store.state.browser.hasTouch
-
         await this.$nextTick()
         this.isActive = true
     },
@@ -33,11 +30,11 @@ export default {
             return [
                 'container',
                 _kebabCase(this.$route.name),
-                { 'is-touch': this.isTouch },
-                { 'is-hover': !this.isTouch },
+                { 'is-desktop': this.$device.isDesktop },
+                { 'is-mobile': this.$device.isMobileOrTablet },
                 {
                     'mobile-menu-opened':
-                        this.$store.getters['browser/isMobile'] &&
+                        this.$device.isMobileOrTablet &&
                         this.$store.state.mobileMenuOpened
                 }
             ]

@@ -12,8 +12,6 @@ export const state = () => {
         winWidth: 1200,
         sTop: 0,
         referredFrom: null,
-        hasHover: false,
-        hasTouch: false,
         windowBlurred: false,
         dataLoading: false,
         mouseX: 0,
@@ -50,12 +48,6 @@ export const mutations = {
     },
     SET_REFERRED: (state, ref) => {
         state.referredFrom = ref
-    },
-    USER_CAN_HOVER: state => {
-        state.hasHover = true
-    },
-    USER_CAN_TOUCH: state => {
-        state.hasTouch = true
     },
     SET_WINDOW_BLURRED: state => {
         state.windowBlurred = true
@@ -97,8 +89,5 @@ export const getters = {
     breakpoint(state) {
         if (state.winWidth <= 750) return 'mobile'
         return 'desktop'
-    },
-    isMobile(state) {
-        return (state.winWidth && state.winWidth <= 750) || state.hasTouch
     }
 }

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import { throttle } from 'lodash'
-import isTouchDevice from 'is-touch-device'
 import { autoBlur } from 'auto-blur'
 import {
     mouseMoveHandler,
@@ -32,13 +31,6 @@ export default async ({ store, route }, inject) => {
     }
     window.onfocus = () => {
         store.commit('browser/SET_WINDOW_FOCUSSED')
-    }
-
-    // detect touch or hover
-    if (isTouchDevice()) {
-        store.commit('browser/USER_CAN_TOUCH')
-    } else {
-        store.commit('browser/USER_CAN_HOVER')
     }
 
     // load fonts
