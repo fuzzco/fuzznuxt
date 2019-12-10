@@ -185,6 +185,7 @@ This template uses the following structure in Prismic on the global site setting
         "label" : "Image"
       }
     }
+}
 ```
 
 On each page-level component, use the `seo` lib:
