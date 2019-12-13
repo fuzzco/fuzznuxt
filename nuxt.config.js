@@ -71,8 +71,8 @@ module.exports = {
     /*
      * Server
      */
-    // force SSL
-    serverMiddleware: ['redirect-ssl'],
+    serverMiddleware:
+        process.env.NODE_ENV === 'development' ? [] : ['redirect-ssl'],
 
     /*
      * Build settings
