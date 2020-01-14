@@ -120,5 +120,5 @@ const prod = {
 
 module.exports = {
     ...universal,
-    ...(process.env === 'development' ? dev : prod)
+    ...(process.env.NODE_ENV === 'development' ? dev : prod)
 }
