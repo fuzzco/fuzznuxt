@@ -15,7 +15,8 @@ export const state = () => {
         windowBlurred: false,
         dataLoading: false,
         mouseX: 0,
-        mouseY: 0
+        mouseY: 0,
+        observer: null
     }
 }
 
@@ -64,6 +65,38 @@ export const mutations = {
     SET_RELATIVE_MOUSE_POS: (state, { x, y }) => {
         state.mouseX = x
         state.mouseY = y
+    },
+    INITIALIZE_OBSERVER: (
+        state,
+        { onEnter, onLeave } = { onEnter: null, onLeave: null }
+    ) => {
+        state.observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view')
+                    if (onEnter) {
+                        onEnter(entry)
+                    }
+                } else {
+                    entry.target.classList.remove('in-view')
+                    if (onLeave) {
+                        onLeave(entry)
+                    }
+                }
+            })
+        })
+    },
+    OBSERVE: (state, el) => {
+        // cancel if no observer
+        if (!state.observer) {
+            return
+        }
+
+        if (Array.isArray(el)) {
+            el.forEach(e => state.observer.observe(e))
+        } else {
+            state.observer.observe(el)
+        }
     }
 }
 

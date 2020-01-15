@@ -67,9 +67,9 @@ const universal = {
      */
     plugins: [
         { src: '~/plugins/browser', ssr: false },
-        '~/plugins/bootstrap',
-        '~/plugins/global-components',
-        '~/plugins/global-filters'
+        '~/plugins/bootstrap'
+        // '~/plugins/global-components',
+        // '~/plugins/global-filters'
     ],
 
     /*
@@ -120,5 +120,5 @@ const prod = {
 
 module.exports = {
     ...universal,
-    ...(process.env === 'development' ? dev : prod)
+    ...(process.env.NODE_ENV === 'development' ? dev : prod)
 }

@@ -37,7 +37,7 @@ export default async ({ store, route }, inject) => {
     store.dispatch('browser/LOAD_FONTS')
 
     // register directives
-    Vue.directive('full-height', require('fh-components/v-full-height'))
+    // Vue.directive('full-height', require('fh-components/v-full-height'))
     // Vue.directive('reverse-hover', require('fh-components/v-reverse-hover'))
     // Vue.directive('in-view', require('fh-components/v-in-view'))
 
@@ -49,11 +49,11 @@ export default async ({ store, route }, inject) => {
     // Vue.component('fragment-shader', require('@fuzzco/fragment-shader'))
     // Vue.component('vue-marquee', require('@fuzzco/vue-marquee'))
     // Vue.component('scrub-wrap', require('@fuzzco/scrub-wrap'))
-    Vue.component('super-image', require('@fuzzco/super-image'))
+    // Vue.component('super-image', require('@fuzzco/super-image'))
 
     // Register mixins
-    Vue.mixin(require('@fuzzco/in-view'))
-    Vue.mixin(require('~/mixins/head'))
+    // Vue.mixin(require('@fuzzco/in-view'))
+    // Vue.mixin(require('~/mixins/head'))
 
     // autoblur
     autoBlur()
