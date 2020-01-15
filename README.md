@@ -41,40 +41,6 @@ The first thing to run in the template is `plugins/bootstrap.js` - this will be 
 
 From there, Nuxt's normal [layout](https://nuxtjs.org/api/pages-layout/) and [page](https://nuxtjs.org/guide/views#pages) rules apply. There are **two notable exceptions:**
 
--   The `components` directory: Thanks to `plugins/global-components.js`, every Vue file in the `components` directory will automatically register globally. Kebab-case rules will apply to directory and PascalCase names - for example, this structure:
-
-    ```
-    | ContactForm.vue
-    | site/
-    | --- Header.vue
-    | --- footer.vue
-    ```
-
-    will register the following components:
-
-    -   `contact-form`
-    -   `site-header`
-    -   `site-footer`
-
-    To create async components in the `components` folder, end the component's name with `.async.vue` and register manually. For example, in the following contents of `~/components/`:
-
-    ```
-    | site/
-    | --- NormalComponent.vue
-    | --- LargeComponent.async.vue
-    ```
-
-    `site-normal-component` will automatically register globally, but `site-large-component` will need to be manually registered, ideally asynchronously:
-
-    ```js
-    export default {
-        components: {
-            'large-component': () =>
-                import('~/components/site/LargeComponent.async.vue')
-        }
-    }
-    ```
-
 -   `_vars.scss`: Thanks to the [style-resources-module](https://github.com/nuxt-community/style-resources-module), the contents of `assets/scss/_vars.scss` will automatically be `@include`d in every Vue component on the site.
 
 ## Included
@@ -119,7 +85,7 @@ Contains hover/focus enter and exit event listeners and adds the `hovering` prop
 
 #### prisImg
 
-Globally included in `plugins/bootstrap.js`. Filter function for Prismic images. Use, for example, with [super-image](https://github.com/fuzzco/super-image):
+Filter function for Prismic images. Use, for example, with [super-image](https://github.com/fuzzco/super-image):
 
 `<super-image v-bind="prisImg(image)"/>`
 
@@ -209,7 +175,7 @@ On each page-level component, use the `seo` lib:
 </script>
 ```
 
-This will combine with the globally-included `head` mixin (`~/mixins/head`) to populate SEO fields for each page.
+This will combine with the `head` mixin (`~/mixins/head`) to populate SEO fields for each page.
 
 ## Deployment
 

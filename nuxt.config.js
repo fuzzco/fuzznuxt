@@ -67,9 +67,9 @@ const universal = {
      */
     plugins: [
         { src: '~/plugins/browser', ssr: false },
-        '~/plugins/bootstrap',
-        '~/plugins/global-components',
-        '~/plugins/global-filters'
+        '~/plugins/bootstrap'
+        // '~/plugins/global-components',
+        // '~/plugins/global-filters'
     ],
 
     /*

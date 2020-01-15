@@ -1,5 +1,5 @@
 <template>
-    <div :class="classes" v-full-height.min>
+    <div :class="classes">
         <div id="description" v-html="$store.state.description" />
 
         <site-header />
@@ -24,6 +24,10 @@ export default {
     async mounted() {
         await this.$nextTick()
         this.isActive = true
+    },
+    components: {
+        'site-header': require('~/components/site/header').default,
+        'site-footer': require('~/components/site/footer').default
     },
     computed: {
         classes() {
