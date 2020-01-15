@@ -1,3 +1,5 @@
+// you'll need to run `npm install backstopjs -D` before running this script
+
 const backstop = require('backstopjs')
 const Prismic = require('prismic-javascript')
 require('dotenv').config()
