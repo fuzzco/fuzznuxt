@@ -29,6 +29,10 @@ Fuzznuxt comes with a script to make font preparation easier.
 1. Drag the downloaded `arcive.zip` to the root directory of your Fuzznuxt project.
 1. Run `npm run fonts`. This will execute `bash/fonts.sh`, which will unzip and organize the fonts from the `arcive.zip` file into the `static/fonts` folder and remove the `arcive.zip` file.
 
+## Prismic setup
+
+-   Create a custom type called `front_page` with the a UID field called `slug` with the value `front-page`. This is the content that will appear on `pages/index.vue`
+
 ## Flow
 
 The first thing to run in the template is `plugins/bootstrap.js` - this will be run server-side, so anything you need guaranteed on load should be retrieved here.
