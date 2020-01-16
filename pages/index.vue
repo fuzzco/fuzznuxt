@@ -1,13 +1,30 @@
 <template>
-    <main class="home"><h2>Home</h2></main>
+    <main class="home">
+        <p>{{ content.image }}</p>
+        <prismic-image v-bind="content.image" :aspect="0.5" />
+    </main>
 </template>
 
 <script>
 import seo from '~/libs/seo'
-import { head, fetchBySlug } from '~/mixins'
+import { head } from '~/mixins'
 
 export default {
-    mixins: [head, fetchBySlug]
+    mixins: [head],
+    components: {
+        'prismic-image': require('~/components/PrismicImage').default
+    },
+    async fetch({ store, params, error }) {
+        const found = await store.dispatch('FETCH_SINGLETON_TYPE', {
+            type: 'front_page'
+        })
+        if (!found) return error({ statusCode: 404, message: 'Not found' })
+    },
+    computed: {
+        content() {
+            return _get(this.$store.state, 'pageData.front_page.data', {})
+        }
+    }
 }
 </script>
 
