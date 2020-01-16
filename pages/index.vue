@@ -1,15 +1,13 @@
 <template>
-    <main class="home"></main>
+    <main class="home"><h2>Home</h2></main>
 </template>
 
 <script>
+import seo from '~/libs/seo'
+import { head, fetchBySlug } from '~/mixins'
+
 export default {
-    async fetch({ store, params, redirect }) {
-        const found = await store.dispatch('FETCH_SINGLE', {
-            type: 'front_page'
-        })
-        if (!found) redirect('/not-found')
-    }
+    mixins: [head, fetchBySlug]
 }
 </script>
 

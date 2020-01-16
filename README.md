@@ -17,10 +17,13 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
 
 1. Download/clone this repo or [degit](https://github.com/Rich-Harris/degit): `degit fuzzco/fuzznuxt your-project-name`.
 1. `npm install`
-1. Copy `.env.example` as `.env` and add the appropriate Prismic URL.
+1. Copy `.env.example` as `.env` and add the appropriate Prismic API URL.
 1. `npm run dev`
+1. Set up Prismic:
+    1. Create a custom type called `front_page` with the a UID field called `slug` with the value `front-page`. This is the content that will appear on `pages/index.vue`
+    1. Create a custom type called `settings`. This is the content that will be used for global site settings.
 
-### Fonts
+## Fonts
 
 Fuzznuxt comes with a script to make font preparation easier.
 
@@ -28,10 +31,6 @@ Fuzznuxt comes with a script to make font preparation easier.
 1. Select "Download all attachments".
 1. Drag the downloaded `arcive.zip` to the root directory of your Fuzznuxt project.
 1. Run `npm run fonts`. This will execute `bash/fonts.sh`, which will unzip and organize the fonts from the `arcive.zip` file into the `static/fonts` folder and remove the `arcive.zip` file.
-
-## Prismic setup
-
--   Create a custom type called `front_page` with the a UID field called `slug` with the value `front-page`. This is the content that will appear on `pages/index.vue`
 
 ## Flow
 

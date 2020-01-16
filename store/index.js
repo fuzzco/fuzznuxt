@@ -26,7 +26,7 @@ export const mutations = {
 }
 
 export const actions = {
-    FETCH_SINGLE: async ({ commit, state }, { type }) => {
+    FETCH_SINGLETON_TYPE: async ({ commit, state }, { type }) => {
         // check if we already have data to return immediately
         if (state.pageData[type]) return state.pageData[type]
 
@@ -34,108 +34,49 @@ export const actions = {
         const docs = await fetchByType({ type })
 
         if (docs && docs.length) {
+            const data = docs[0]
+
             // commit to store
             commit('SET_PAGE_DATA', {
                 key: `${type}`,
-                data: docs[0]
+                data
             })
-            return docs[0]
+            return data
         }
 
         // Not found
         return false
     },
-    FETCH_BY_SLUG: async ({ commit, state }, { type, slug }) => {
+    FETCH_BY_SLUG: async ({ commit, state }, opts = {}) => {
+        // handle if the user just passed a string for the slug
+        if (typeof opts === 'string') {
+            opts = { slug: opts }
+        }
+
+        // slug fallback to `front-page`
+        opts.slug = opts.hasOwnProperty('slug') ? opts.slug : 'front-page'
+        // type fallback to empty
+        opts.type = opts.hasOwnProperty('type') ? opts.type : 'page'
+
+        // build key
+        const key = `${opts.type}/${opts.slug}`
+
         // check if we already have data to return immediately
-        if (state.pageData[`${type}/${slug || 'front-page'}`])
-            return state.pageData[`${type}/${slug || 'front-page'}`]
+        if (state.pageData[key]) return state.pageData[key]
 
         // query Prismic
-        const doc = await fetchByType({ type, slug })
+        const data = await fetchByType(opts)
 
-        console.log('retrieved', doc)
-        if (doc) {
+        if (data) {
             commit('SET_PAGE_DATA', {
-                key: `${type}/${slug || 'front-page'}`,
-                data: doc
+                key,
+                data
             })
 
-            return doc
+            return data
         }
 
         // Not found
         return false
-    },
-    FETCH_VIDEO: async ({ commit, dispatch, state }, ID) => {
-        if (state.pageData[`videos/${ID}`])
-            return state.pageData[`videos/${ID}`]
-
-        return await dispatch('FORCE_FETCH_VIDEO', ID)
-    },
-    FORCE_FETCH_VIDEO: async ({ commit, state }, ID) => {
-        const video = await getVideo(ID, state.user)
-        if (video) {
-            commit('SET_PAGE_DATA', {
-                key: `videos/${ID}`,
-                data: video
-            })
-        }
-        return video
-    },
-    FETCH_VIDEO_IDS: async ({ commit, state }, ids) => {
-        // check if fetch needs to run
-        let hasAll = true
-        for (let i in ids) {
-            const id = ids[i]
-            if (!state.pageData[`videos/${id}`]) {
-                hasAll = false
-                break
-            }
-        }
-
-        // only run if necessary
-        if (!hasAll) {
-            // fetch videos and commit all to store
-            const videos = await getVideosByIds(ids)
-            videos.forEach(video => {
-                commit('SET_PAGE_DATA', {
-                    key: `videos/${video.id}`,
-                    data: video
-                })
-            })
-        }
-    },
-    SHOW_NOTIFICATION: ({ commit, state }, payload) => {
-        const text = payload.text || ''
-        const time = payload.time || 5000
-        const green = payload.hasOwnProperty('isGreen')
-            ? payload.isGreen
-            : false
-
-        // change text
-        commit('SET_NOTIFICATION_TEXT', text)
-        // show banner
-        commit('SET_NOTIFICATION_VISIBLE', true)
-        // banner color
-        commit('SET_NOTIFICATION_GREEN', green)
-
-        // clear old timeout
-        if (notificationTimeout) {
-            clearTimeout(notificationTimeout)
-        }
-
-        // hide text in `time` ms
-        notificationTimeout = setTimeout(() => {
-            commit('SET_NOTIFICATION_VISIBLE', false)
-        }, time)
-    }
-}
-
-export const getters = {
-    contactContent: state => {
-        return _get(state, 'pageData.settings.data.contact_intro_content', [])
-    },
-    contactCta: state => {
-        return _get(state, 'pageData.settings.data.contact_cta', [])
     }
 }
