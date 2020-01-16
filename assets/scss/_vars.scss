@@ -1,16 +1,3 @@
-@import 'easings';
-
-$desktop-padding: 75px;
-$header-height: 280px;
-
-// Mobile versions
-$mobile-padding: 15px;
-$mobile-header-height: 100px;
-$mobile-h2-font-size: 30px;
-$mobile-body-font-size: 14px;
-$title-mobile-size: 28px;
-$mobile-vertical-margin: 50px;
-
 // mixins
 @mixin fill($position: absolute) {
     position: #{$position};
@@ -77,6 +64,17 @@ $mobile-vertical-margin: 50px;
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+// Type Size
+// ---------------------------------------------
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return #{$remSize}rem;
+}
+@mixin fontSize($size) {
+    font-size: $size; // Fallback in px
+    font-size: calculateRem($size);
 }
 
 // Breakpoints

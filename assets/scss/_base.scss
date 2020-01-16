@@ -6,6 +6,7 @@ body {
 
     --black: #000;
     --white: #fff;
+    --font-size: 16px;
 
     --font-body: Helvetica, sans-serif;
     --font-header: var(--font-body);
@@ -13,7 +14,7 @@ body {
     background-color: var(--white);
     font-family: var(--font-body);
     margin: 0;
-    font-size: 16px;
+    font-size: var(--font-size);
     color: var(--black);
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased !important;
@@ -34,7 +35,7 @@ h4 {
     font-family: var(--font-header);
 }
 a {
-    transition: color 250ms $easeInOutQuad;
+    transition: color 250ms;
     text-decoration: none;
     color: var(--black);
 }
@@ -53,8 +54,8 @@ a {
 // Mobile
 @include bp(s) {
     body {
-        --container-padding: #{$mobile-padding};
-        --header-height: #{$mobile-header-height};
+        --container-padding: 15px;
+        --header-height: 100px;
     }
 }
 
@@ -100,24 +101,12 @@ a {
     & > *:last-child {
         margin-bottom: 0;
     }
-
-    // Mobile
-    @include bp(s) {
-        font-size: 16px;
-
-        h3 {
-            font-size: $title-mobile-size;
-        }
-        p {
-            font-size: $mobile-body-font-size;
-        }
-    }
 }
 
 // Basic fade
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 200ms $easeInOutQuad;
+    transition: opacity 200ms;
 }
 .fade-enter,
 .fade-leave-to {
@@ -127,7 +116,7 @@ a {
 // Slow fade
 .slow-fade-enter-active,
 .slow-fade-leave-active {
-    transition: opacity 0.4s $easeInOutQuad;
+    transition: opacity 0.4s;
 }
 .slow-fade-enter,
 .slow-fade-leave-to {
