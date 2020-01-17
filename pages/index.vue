@@ -1,7 +1,6 @@
 <template>
     <main class="home">
-        <p>{{ content.image }}</p>
-        <prismic-image v-bind="content.image" :aspect="0.5" />
+        <prismic-image v-bind="content.image" />
     </main>
 </template>
 

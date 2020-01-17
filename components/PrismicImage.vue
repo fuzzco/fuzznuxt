@@ -5,17 +5,34 @@
         :style="{ '--aspect': cmpAspect + '%' }"
     >
         <component class="image-sizer" :is="innerWrapper">
+            <!-- 2x2 version of image stretched to full size -->
             <img
-                :src="cmpUrl"
+                class="loader"
+                :src="tinyUrl"
                 :width="cmpWidth"
                 :height="cmpHeight"
-                :alt="alt"
+                aria-hidden="true"
+                v-if="!hidePreview"
             />
+            <transition :name="transition">
+                <img
+                    :src="cmpUrl"
+                    :srcset="cmpSrcset"
+                    :width="cmpWidth"
+                    :height="cmpHeight"
+                    :alt="alt"
+                    v-show="loaded"
+                    ref="mainImage"
+                    key="main-image"
+                />
+            </transition>
         </component>
     </component>
 </template>
 
 <script>
+const defaultSizes = [null, 1920, 1100, 800, 500]
+
 export default {
     props: {
         wrapper: {
@@ -34,6 +51,18 @@ export default {
             type: String,
             default: 'div'
         },
+        sizes: {
+            type: Array,
+            default: () => defaultSizes
+        },
+        transition: {
+            type: String,
+            default: 'fade'
+        },
+        hidePreview: {
+            type: Boolean,
+            default: false
+        },
         // props from Prismic
         dimensions: {
             type: Object,
@@ -48,6 +77,20 @@ export default {
             default: ''
         }
         // end props from Prismic
+    },
+    data() {
+        return {
+            loaded: false
+        }
+    },
+    async mounted() {
+        await this.$nextTick()
+        const img = this.$refs.mainImage
+        if (img.complete) {
+            this.loaded = true
+        } else {
+            img.addEventListener('load', () => (this.loaded = true))
+        }
     },
     computed: {
         cmpUrl() {
@@ -68,6 +111,18 @@ export default {
             // otherwise, parse provided aspect, handling both 56.25 and 0.5625 style
             const toParse = parseFloat(this.aspect)
             return toParse <= 1 ? toParse * 100 : toParse
+        },
+        cmpSrcset() {
+            return this.sizes
+                .map(size => {
+                    const width = size === null ? this.cmpWidth : size
+                    const height = Math.round(width / (this.cmpAspect / 100))
+                    return this.cmpUrl + `&w=${width}&h=${height} ${width}w`
+                })
+                .join(', ')
+        },
+        tinyUrl() {
+            return this.cmpUrl + `&w=2&h=2`
         }
     }
 }
