@@ -1,5 +1,9 @@
 <template>
     <main class="home">
+        <div class="container">
+            <prismic-image fill-space fit="contain" v-bind="content.image" />
+        </div>
+
         <prismic-image v-bind="content.image" />
     </main>
 </template>
@@ -29,5 +33,10 @@ export default {
 
 <style lang="scss">
 main.home {
+    .container {
+        width: 200px;
+        position: relative;
+        height: 400px;
+    }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <component
-        class="prismic-image"
+        :class="['prismic-image', { 'fill-space': fillSpace }, `fit-${fit}`]"
         :is="wrapper"
         :style="{ '--aspect': cmpAspect + '%' }"
     >
@@ -24,6 +24,7 @@
                     v-show="loaded"
                     ref="mainImage"
                     key="main-image"
+                    class="media"
                 />
             </transition>
         </component>
@@ -62,6 +63,14 @@ export default {
         hidePreview: {
             type: Boolean,
             default: false
+        },
+        fillSpace: {
+            type: Boolean,
+            default: false
+        },
+        fit: {
+            type: String,
+            default: 'cover'
         },
         // props from Prismic
         dimensions: {
@@ -139,12 +148,33 @@ export default {
 
         & > * {
             position: absolute;
-            object-fit: cover;
             height: 100%;
             width: 100%;
             left: 0;
             top: 0;
         }
+    }
+
+    // fill space
+    &.fill-space {
+        height: 100%;
+
+        .image-sizer {
+            padding-bottom: 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+
+    // fits
+    &.fit-cover .image-sizer > * {
+        object-fit: cover;
+    }
+    &.fit-contain .image-sizer > * {
+        object-fit: contain;
     }
 }
 </style>
