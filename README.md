@@ -153,20 +153,20 @@ Wrapper for a Prismic image. Features:
 
 ##### Props
 
-| Name          | Type           | Default                        | Notes                                                                                                                                 |
-| ------------- | -------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| alt           | String         | `''`                           | Image alt text. Usually handled by Prismic and `v-bind`.                                                                              |
-| aspect        | String, Number | `-1`                           | Aspect ratio. Can be string or number between 0-1 or 0-100 (56.25% could be passed as either `aspect="56.25" or ":aspect="0.5625"`).  |
-| dimensions    | Object         | `{ width: -1, height: -1 }`    | Original image dimensions. Usually handled by Prismic and `v-bind`.                                                                   |
-| fill-space    | Boolean        | `false`                        | Whether or not this image should take up all available space.                                                                         |
-| fit           | String         | `cover`                        | Value for `object-fit`. Usually either `cover` or `contain`.                                                                          |
-| hide-preview  | Boolean        | `false`                        | `prismic-image` loads a 1x1 version of the image and stretches it to full size as a preview. Set this to `true` to hide that preview. |
-| inner-wrapper | String         | `div`                          | The sizer for the image. The item that is `width: 100%` and `padding-bottom: [aspect ratio]`.                                         |
-| sizes         | Array          | `[null, 1920, 1100, 800, 500]` | Sizes for the `srcset` image. Null for full size, otherwise width in px.                                                              |
-| src           | String         | `''`                           | Fallback URL for the image. `url` is preferred over this to align with Prismic's data format.                                         |
-| transition    | String         | `fade`                         | The transition to use for the main image when it has loaded.                                                                          |
-| url           | String         | `''`                           | URL for the image. Usually handled by Prismic and `v-bind`.                                                                           |
-| wrapper       | String         | `div`                          | The outermost element wrapping the `prismic-image`.                                                                                   |
+| Name          | Type           | Default                        | Notes                                                                                                                                                                |
+| ------------- | -------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| alt           | String         | `''`                           | Image alt text. Usually handled by Prismic and `v-bind`.                                                                                                             |
+| aspect        | String, Number | `-1`                           | Aspect ratio. Calculated automatically if -1. Can be string or number between 0-1 or 0-100 (56.25% could be passed as either `aspect="56.25" or ":aspect="0.5625"`). |
+| dimensions    | Object         | `{ width: -1, height: -1 }`    | Original image dimensions. Usually handled by Prismic and `v-bind`.                                                                                                  |
+| fill-space    | Boolean        | `false`                        | Whether or not this image should take up all available space.                                                                                                        |
+| fit           | String         | `cover`                        | Value for `object-fit`. Usually either `cover` or `contain`.                                                                                                         |
+| hide-preview  | Boolean        | `false`                        | `prismic-image` loads a 1x1 version of the image and stretches it to full size as a preview. Set this to `true` to hide that preview.                                |
+| inner-wrapper | String         | `div`                          | The sizer for the image. The item that is `width: 100%` and `padding-bottom: [aspect ratio]`.                                                                        |
+| sizes         | Array          | `[null, 1920, 1100, 800, 500]` | Sizes for the `srcset` image. Null for full size, otherwise width in px.                                                                                             |
+| src           | String         | `''`                           | Fallback URL for the image. `url` is preferred over this to align with Prismic's data format.                                                                        |
+| transition    | String         | `fade`                         | The transition to use for the main image when it has loaded.                                                                                                         |
+| url           | String         | `''`                           | URL for the image. Usually handled by Prismic and `v-bind`.                                                                                                          |
+| wrapper       | String         | `div`                          | The outermost element wrapping the `prismic-image`.                                                                                                                  |
 
 ## SEO Setup
 
