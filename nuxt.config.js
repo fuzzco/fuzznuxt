@@ -60,7 +60,11 @@ const universal = {
     /*
      * Modules
      */
-    modules: ['@nuxtjs/style-resources', '@nuxtjs/device'],
+    modules: [
+        '@nuxtjs/style-resources',
+        '@nuxtjs/device',
+        '@nuxtjs/component-cache'
+    ],
 
     /*
      * Plugins

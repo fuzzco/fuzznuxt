@@ -30,7 +30,7 @@
         "@fuzzco/scrub-wrap": "^1.1.1",
         "@fuzzco/super-image": "^1.1.1",
         "@fuzzco/vue-marquee": "^1.0.1",
-        "@nuxtjs/component-cache": "^1.1.4",
+        "@nuxtjs/component-cache": "1.1.5",
         "@nuxtjs/device": "^1.2.4",
         "@nuxtjs/style-resources": "^0.1.2",
         "@popmotion/popcorn": "^0.4.0",
