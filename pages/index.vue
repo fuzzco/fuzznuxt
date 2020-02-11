@@ -17,11 +17,14 @@ export default {
     components: {
         'prismic-image': require('~/components/PrismicImage').default
     },
-    async fetch({ store, params, error }) {
-        const found = await store.dispatch('FETCH_SINGLETON_TYPE', {
-            type: 'front_page'
+    async asyncData({ store }) {
+        const found = await store.dispatch('FETCH_BY_SLUG', {
+            slug: 'front-page'
         })
         if (!found) return error({ statusCode: 404, message: 'Not found' })
+
+        const fallback = store.state.pageData.settings
+        return seo(found, fallback, store)
     },
     computed: {
         content() {

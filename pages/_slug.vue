@@ -11,7 +11,16 @@ import seo from '~/libs/seo'
 import { head, fetchBySlug } from '~/mixins'
 
 export default {
-    mixins: [head, fetchBySlug]
+    mixins: [head, fetchBySlug],
+    async asyncData({ store, params, error }) {
+        const found = await store.dispatch('FETCH_BY_SLUG', {
+            slug: params.slug
+        })
+        if (!found) return error({ statusCode: 404, message: 'Not found' })
+
+        const fallback = store.state.pageData.settings
+        return seo(found, fallback, store)
+    }
 }
 
 // if fetchBySlug isn't enough, you can remove the above and use this:
