@@ -22,7 +22,7 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
 1. Copy `.env.example` as `.env` and add the appropriate Prismic API URL.
 1. `npm run dev`
 1. Set up Prismic:
-    1. Create a custom type called `front_page` with the a UID field called `slug` with the value `front-page`. This is the content that will appear on `pages/index.vue`
+    1. Create a custom type called `page` with the a UID field called `slug`. Create a Page with the slug `front-page`. This is the content that will appear on `pages/index.vue`
     1. Create a custom type called `settings`. This is the content that will be used for global site settings.
 
 ## Fonts

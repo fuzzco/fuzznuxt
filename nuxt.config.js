@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const dotenv = require('dotenv')
 dotenv.config()
+const generate = require('./scripts/generate')
 
 const universal = {
     /*
@@ -25,6 +26,11 @@ const universal = {
     env: {
         ...process.env
     },
+
+    /*
+     * Generation
+     */
+    generate,
 
     /*
      * Head
