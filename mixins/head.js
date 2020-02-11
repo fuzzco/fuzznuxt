@@ -1,37 +1,49 @@
+const defaultImage = 'URL OF FALLBACK IMAGE FROM STATIC FOLDER HERE'
+
 export default {
     head() {
         return {
-            title: this.seoTitle,
+            title: this.seoTitle || this.seoDefaultTitle,
             meta: [
                 {
                     hid: 'description',
                     name: 'description',
-                    content: this.seoDescription
+                    content: this.seoDescription || this.seoDefaultDescription
                 },
                 {
                     hid: 'og:description',
                     property: 'og:description',
-                    content: this.seoDescription
+                    content: this.seoDescription || this.seoDefaultDescription
                 },
                 {
                     hid: 'og:image',
-                    name: 'og:image',
-                    content: this.seoImage
+                    property: 'og:image',
+                    content: this.seoImage || this.seoDefaultImage
+                },
+                {
+                    hid: 'og:title',
+                    property: 'og:title',
+                    content: this.seoTitle || this.seoDefaultTitle
+                },
+                {
+                    hid: 'og:type',
+                    property: 'og:type',
+                    content: this.seoType || 'website'
                 },
                 {
                     hid: 'twitter:description',
-                    property: 'twitter:description',
-                    content: this.seoDescription
+                    name: 'twitter:description',
+                    content: this.seoDescription || this.seoDefaultDescription
                 },
                 {
                     hid: 'twitter:title',
-                    property: 'twitter:title',
-                    content: this.seoTitle
+                    name: 'twitter:title',
+                    content: this.seoTitle || this.seoDefaultTitle
                 },
                 {
                     hid: 'twitter:image',
-                    property: 'twitter:image',
-                    content: this.seoImage
+                    name: 'twitter:image',
+                    content: this.seoImage || this.seoDefaultImage
                 },
                 {
                     hid: 'twitter:card',
@@ -39,6 +51,30 @@ export default {
                     content: 'summary_large_image'
                 }
             ]
+        }
+    },
+    computed: {
+        seoDefaultImage() {
+            return (
+                _get(
+                    this.$store.state,
+                    'pageData.settings.data.site_image.url'
+                ) || defaultImage
+            )
+        },
+        seoDefaultDescription() {
+            return (
+                _get(
+                    this.$store.state,
+                    'pageData.settings.data.site_description'
+                ) || ''
+            )
+        },
+        seoDefaultTitle() {
+            return (
+                _get(this.$store.state, 'pageData.settings.data.site_title') ||
+                ''
+            )
         }
     }
 }
