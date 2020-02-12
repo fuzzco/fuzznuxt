@@ -5,6 +5,7 @@ import {
     resizeHandler,
     scrollHandler
 } from '~/plugins/dom-handlers'
+import Vue from 'vue'
 
 // plugin
 export default async ({ store, route }, inject) => {
@@ -24,6 +25,13 @@ export default async ({ store, route }, inject) => {
 
     // load fonts
     store.dispatch('browser/LOAD_FONTS')
+
+    // global important components
+    Vue.component('a-div', require('~/components/ADiv.vue').default)
+    Vue.component(
+        'prismic-image',
+        require('~/components/PrismicImage.vue').default
+    )
 
     // autoblur
     autoBlur()
