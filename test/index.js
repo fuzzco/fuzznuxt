@@ -6,7 +6,7 @@ require('dotenv').config()
 const { get } = require('lodash')
 const { spawn, execSync } = require('child_process')
 const colors = require('colors')
-const config = require('./config')
+const config = require('./config.json')
 const prompts = require('prompts')
 
 // helper to init API
@@ -31,19 +31,19 @@ const getSlugs = async () => {
 }
 
 // start server
-const startServer = async () => {
-    return new Promise(async res => {
-        const server = await spawn('npm', ['run', 'dev'])
-        server.on('error', console.log)
-        server.stdout.on('data', data => {
-            process.stdout.write('.'.yellow)
-            // this is probably a terrible way to do this
-            if (data.includes('Server listening')) {
-                res(server)
-            }
-        })
-    })
-}
+// const startServer = async () => {
+//     return new Promise(async res => {
+//         const server = await spawn('npm', ['run', 'dev'])
+//         server.on('error', console.log)
+//         server.stdout.on('data', data => {
+//             process.stdout.write('.'.yellow)
+//             // this is probably a terrible way to do this
+//             if (data.includes('Server listening')) {
+//                 res(server)
+//             }
+//         })
+//     })
+// }
 
 // roadmap
 const run = async () => {
@@ -68,8 +68,8 @@ const run = async () => {
         )
 
         // start server
-        process.stdout.write('Starting server'.yellow)
-        server = await startServer()
+        process.stdout.write('Starting server\n'.yellow)
+        // server = await startServer()
         console.log('Ready!'.green)
 
         // run tests
@@ -78,12 +78,14 @@ const run = async () => {
                 ...config
             }
             const url = config.scenarios[0].url + '/'
-            slugs.forEach(slug => {
-                dynConfig.scenarios.push({
-                    label: slug,
-                    url: url + slug
+            slugs
+                .filter(slug => slug !== 'front-page')
+                .forEach(slug => {
+                    dynConfig.scenarios.push({
+                        label: slug,
+                        url: url + slug
+                    })
                 })
-            })
 
             await backstop('test', { config: dynConfig })
             console.log('All tests passed!'.green)

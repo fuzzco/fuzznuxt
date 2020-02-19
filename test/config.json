@@ -1,24 +1,38 @@
 {
-    "doNotTest": [],
-    "maxOfType": -1,
-
-    "id": "fuzznuxt",
+    "id": "fuzznuxt_default",
     "viewports": [
-        {
-            "label": "desktop",
-            "width": 1200,
-            "height": 672
-        },
         {
             "label": "phone",
             "width": 320,
             "height": 480
+        },
+        {
+            "label": "laptop",
+            "width": 1500,
+            "height": 845
         }
     ],
+    "onBeforeScript": "puppet/onBefore.js",
+    "onReadyScript": "puppet/onReady.js",
     "scenarios": [
         {
-            "label": "Front Page",
-            "url": "http://localhost:3000"
+            "label": "Homepage",
+            "cookiePath": "backstop_data/engine_scripts/cookies.json",
+            "url": "http://127.0.0.1:8080",
+            "referenceUrl": "",
+            "readyEvent": "",
+            "readySelector": "",
+            "delay": 2000,
+            "hideSelectors": [],
+            "removeSelectors": [],
+            "hoverSelector": "",
+            "clickSelector": "",
+            "postInteractionWait": 0,
+            "selectors": [],
+            "selectorExpansion": true,
+            "expect": 0,
+            "misMatchThreshold": 0.1,
+            "requireSameDimensions": true
         }
     ],
     "paths": {
@@ -28,9 +42,11 @@
         "html_report": "backstop_data/html_report",
         "ci_report": "backstop_data/ci_report"
     },
-    "misMatchThreshold": 1.0,
     "report": ["browser"],
-    "engine": "chrome",
+    "engine": "puppeteer",
+    "engineOptions": {
+        "args": ["--no-sandbox"]
+    },
     "asyncCaptureLimit": 5,
     "asyncCompareLimit": 50,
     "debug": false,

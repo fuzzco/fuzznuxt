@@ -9,7 +9,7 @@
         "build": "nuxt build",
         "start": "nuxt start",
         "generate": "nuxt generate",
-        "test": "node test",
+        "test": "npm run generate; http-server dist & FUZZNUXT_SRV_PID=$!; node test; kill -9 $FUZZNUXT_SRV_PID",
         "heroku-postbuild": "npm run build",
         "fonts": "sh bash/fonts.sh",
         "deploy": "git push heroku master"
