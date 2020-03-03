@@ -1,6 +1,4 @@
 <template>
-    <!-- This is a template for any Fuzznuxt page. You can duplicate this file to
-    get started right away. -->
     <main class="page">
         <nuxt-link to="/">Home</nuxt-link>
     </main>
@@ -8,13 +6,13 @@
 
 <script>
 import seo from '~/libs/seo'
-import { head, fetchBySlug } from '~/mixins'
+import { head } from '~/mixins'
 
 export default {
-    mixins: [head, fetchBySlug],
+    mixins: [head],
     async asyncData({ store, params, error }) {
         const found = await store.dispatch('FETCH_BY_SLUG', {
-            slug: params.slug
+            slug: params.slug || 'front-page'
         })
         if (!found) return error({ statusCode: 404, message: 'Not found' })
 
