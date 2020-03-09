@@ -32,6 +32,13 @@ export default async ({ store, route }, inject) => {
         'prismic-image',
         require('~/components/PrismicImage.vue').default
     )
+    Vue.component(
+        'prismic-content',
+        // standard build, no relative links in content
+        require('~/components/prismic/Content.vue').default
+        // full build, relative links in content work correctly
+        // require('~/components/prismic/ContentFull.vue').default
+    )
 
     // autoblur
     autoBlur()

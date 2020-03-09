@@ -13,6 +13,10 @@ const universal = {
                 _get: 'lodash/get'
             })
         ]
+        /** Uncomment this if you need to use the full Vue build */
+        // extend(config) {
+        //     config.resolve.alias['vue'] = 'vue/dist/vue.common'
+        // }
     },
 
     /*
