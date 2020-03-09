@@ -8,7 +8,7 @@
 
 <script>
 // NOTE:
-// This will not handle relateive links in body content correctly.
+// This will not handle relative links in body content correctly.
 // For that to work, switch `prismic-content` to `prismic-content-full`.
 // See `~/components/prismic/ContentFull.vue` for more info.
 
