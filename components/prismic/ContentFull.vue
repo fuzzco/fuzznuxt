@@ -1,8 +1,6 @@
 <template>
     <component class="prismic-content" :is="wrapper">
-        <div>
-            <v-runtime-template :template="formattedContent" />
-        </div>
+        <v-runtime-template :template="formattedContent" />
     </component>
 </template>
 
