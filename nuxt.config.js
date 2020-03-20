@@ -54,6 +54,15 @@ const universal = {
         link: [
             { rel: 'icon', href: '/images/favicon.png' },
             { rel: 'stylesheet', href: '/fonts/fonts.css' }
+        ],
+        script: [
+            {
+                src: `//static.cdn.prismic.io/prismic.js?repo=${
+                    process.env.PRISMIC_REPO_NAME
+                }&new=true`,
+                async: true,
+                defer: true
+            }
         ]
     },
 
