@@ -2,7 +2,7 @@
     <component
         :class="['prismic-image', { 'fill-space': fillSpace }, `fit-${fit}`]"
         :is="wrapper"
-        :style="{ '--aspect': cmpAspect + '%' }"
+        :style="cmpStyle"
     >
         <component class="image-sizer" :is="innerWrapper">
             <!-- 2x2 version of image stretched to full size -->
@@ -72,6 +72,22 @@ export default {
             type: String,
             default: 'cover'
         },
+        respectMax: {
+            type: Boolean,
+            default: false
+        },
+        scaleMax: {
+            type: Number,
+            default: 1
+        },
+        ignoreSrcset: {
+            type: Boolean,
+            default: false
+        },
+        noCompress: {
+            type: Boolean,
+            default: false
+        },
         // props from Prismic
         dimensions: {
             type: Object,
@@ -103,7 +119,13 @@ export default {
     },
     computed: {
         cmpUrl() {
-            return this.url || this.src
+            const output = this.url || this.src
+
+            // gif files can't use compression, so let's force the full URL
+            if (this.noCompress || output.includes('.gif')) {
+                return output.replace(/\?.*$/, '')
+            }
+            return output
         },
         cmpWidth() {
             return this.dimensions.width
@@ -122,6 +144,11 @@ export default {
             return toParse <= 1 ? toParse * 100 : toParse
         },
         cmpSrcset() {
+            // gifs can't resize without breaking
+            if (this.ignoreSrcset || this.cmpUrl.includes('.gif')) {
+                return ''
+            }
+
             return this.sizes
                 .map(size => {
                     const width = size === null ? this.cmpWidth : size
@@ -129,6 +156,15 @@ export default {
                     return this.cmpUrl + `&w=${width}&h=${height} ${width}w`
                 })
                 .join(', ')
+        },
+        cmpStyle() {
+            const output = { '--aspect': this.cmpAspect + '%' }
+            if (this.respectMax) {
+                output['--max-width'] = `${this.cmpWidth * this.scaleMax}px`
+                // output['--max-height'] = `${this.cmpHeight}px`
+            }
+
+            return output
         },
         tinyUrl() {
             return this.cmpUrl + `&w=2&h=2`
@@ -141,10 +177,12 @@ export default {
 .prismic-image {
     position: relative;
     width: 100%;
+    max-width: var(--max-width);
 
     .image-sizer {
         overflow: hidden;
         padding-bottom: var(--aspect);
+        position: relative;
 
         & > * {
             position: absolute;
