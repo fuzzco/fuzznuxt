@@ -5,36 +5,40 @@
         :style="cmpStyle"
     >
         <component class="image-sizer" :is="innerWrapper">
-            <!-- 2x2 version of image stretched to full size -->
-            <img
-                class="loader"
-                :src="tinyUrl"
-                :width="cmpWidth"
-                :height="cmpHeight"
-                aria-hidden="true"
-                v-if="!hidePreview"
-            />
-            <transition :name="transition">
+            <template v-if="cmpImagePresent">
+                <!-- 2x2 version of image stretched to full size -->
                 <img
-                    :src="cmpUrl"
-                    :srcset="cmpSrcset"
+                    class="loader"
+                    :src="tinyUrl"
                     :width="cmpWidth"
                     :height="cmpHeight"
-                    :alt="alt"
-                    v-show="loaded"
-                    ref="mainImage"
-                    key="main-image"
-                    class="media"
+                    aria-hidden="true"
+                    v-if="!hidePreview"
                 />
-            </transition>
+                <transition :name="transition">
+                    <img
+                        :src="cmpUrl"
+                        :srcset="cmpSrcset"
+                        :width="cmpWidth"
+                        :height="cmpHeight"
+                        :alt="alt"
+                        v-show="loaded"
+                        ref="mainImage"
+                        key="main-image"
+                        class="media"
+                    />
+                </transition>
+            </template>
         </component>
     </component>
 </template>
 
 <script>
+import observe from '~/mixins/observe'
 const defaultSizes = [null, 1920, 1100, 800, 500]
 
 export default {
+    mixins: [observe],
     props: {
         wrapper: {
             type: String,
@@ -88,6 +92,10 @@ export default {
             type: Boolean,
             default: false
         },
+        defer: {
+            type: Boolean,
+            default: false
+        },
         // props from Prismic
         dimensions: {
             type: Object,
@@ -105,16 +113,16 @@ export default {
     },
     data() {
         return {
-            loaded: false
+            loaded: false,
+            inLoadRange: false
         }
     },
     async mounted() {
-        await this.$nextTick()
-        const img = this.$refs.mainImage
-        if (img.complete) {
-            this.loaded = true
+        if (this.defer) {
+            this.observe(this.$el, this.updateObserve)
         } else {
-            img.addEventListener('load', () => (this.loaded = true))
+            await this.$nextTick()
+            this.runLoadListener()
         }
     },
     computed: {
@@ -143,6 +151,11 @@ export default {
             const toParse = parseFloat(this.aspect)
             return toParse <= 1 ? toParse * 100 : toParse
         },
+        cmpImagePresent() {
+            if (!this.defer) return true
+
+            return this.inLoadRange
+        },
         cmpSrcset() {
             // gifs can't resize without breaking
             if (this.ignoreSrcset || this.cmpUrl.includes('.gif')) {
@@ -168,6 +181,37 @@ export default {
         },
         tinyUrl() {
             return this.cmpUrl + `&w=2&h=2`
+        }
+    },
+    methods: {
+        runLoadListener() {
+            const img = this.$refs.mainImage
+            if (!img) return
+
+            if (img.complete) {
+                this.loaded = true
+            } else {
+                img.addEventListener('load', () => (this.loaded = true))
+            }
+        },
+        updateObserve([observerData]) {
+            if (!observerData) return
+
+            // if we do, check if the top or bottom are within loadRange
+            if (observerData.isIntersecting) {
+                // mark as within range
+                this.inLoadRange = true
+                // and tear down observers
+                this.runObserverTeardown()
+            }
+        }
+    },
+    watch: {
+        async inLoadRange(newVal) {
+            if (newVal) {
+                await this.$nextTick()
+                this.runLoadListener()
+            }
         }
     }
 }
