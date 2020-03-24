@@ -8,6 +8,12 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
 1. [Included](#included)
     1. [Libs](#libs)
     1. [Mixins](#mixins)
+        1. [Head](#head)
+        1. [Hovering](#hovering)
+        1. [Observe](#observe)
+        1. [prisImg](#prisimg)
+        1. [Rect](#rect)
+        1. [Slideshow](#slideshow)
     1. [Components](#components)
         1. [Prismic Image](#prismic-image)
 1. [SEO](#seo-setup)
@@ -84,6 +90,22 @@ Automatically included on every component. Will set SEO values and page title ap
 #### Hovering
 
 Contains hover/focus enter and exit event listeners and adds the `hovering` property to the component's data.
+
+#### Observe
+
+Shortcuts for setting up and tearing down [intersection observers](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver).
+
+```js
+mounted(){
+    const elementToObserve = this.$el // or desired element
+    this.observe(elementToObserve, this.updateObserve)
+},
+methods: {
+    updateObserve([observerData]){
+        console.log(observerData)
+    }
+}
+```
 
 #### prisImg
 
