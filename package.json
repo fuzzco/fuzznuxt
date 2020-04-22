@@ -1,9 +1,12 @@
 {
     "name": "fuzznuxt",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "description": "Fuzzco Nuxt boilerplate.",
     "author": "Fuzzco",
     "private": true,
+    "bin": {
+        "fuzznuxt": "./scripts/npx.js"
+    },
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
         "build": "nuxt build",
