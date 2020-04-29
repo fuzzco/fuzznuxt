@@ -16,12 +16,13 @@ export default async ({ store, route }, inject) => {
     window.addEventListener('mousemove', evt => {
         mouseMoveHandler(evt, store)
     })
-    window.onblur = () => {
-        store.commit('browser/SET_WINDOW_BLURRED')
-    }
-    window.onfocus = () => {
-        store.commit('browser/SET_WINDOW_FOCUSSED')
-    }
+    document.addEventListener('visibilitychange', evt => {
+        store.commit(
+            store.state.browser.windowBlurred
+                ? 'browser/SET_WINDOW_FOCUSSED'
+                : 'browser/SET_WINDOW_BLURRED'
+        )
+    })
 
     // load fonts
     store.dispatch('browser/LOAD_FONTS')
