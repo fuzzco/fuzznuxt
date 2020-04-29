@@ -8,9 +8,11 @@ import Prismic from 'prismic-javascript'
 
 export default {
     async mounted() {
-        let previewToken = this.$route.query.token
+        const { token, documentId } = this.$route.query
         const api = await Prismic.getApi(process.env.PRISMIC_URL)
-        const url = await api.previewSession(previewToken, linkResolver, '/')
+        const url = await api
+            .getPreviewResolver(token, documentId)
+            .resolve(linkResolver, '/')
         this.$router.push(url)
     }
 }
