@@ -3,7 +3,6 @@
     "version": "5.0.0",
     "description": "Fuzzco Nuxt boilerplate.",
     "author": "Fuzzco",
-    "private": true,
     "bin": {
         "fuzznuxt": "./scripts/scaffold/npx.sh"
     },
