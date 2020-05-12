@@ -23,8 +23,8 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
 
 ## Installation
 
-1. Download/clone this repo or [degit](https://github.com/Rich-Harris/degit): `degit fuzzco/fuzznuxt your-project-name`.
-1. `npm install`
+1. Make sure you have [degit](https://github.com/Rich-Harris/degit#installation) and [prettier](https://prettier.io/docs/en/install.html) installed. Also make sure you have the Atom command installed (see "Another way to open a file..." [here](https://flight-manual.atom.io/getting-started/sections/atom-basics/#opening-a-file)).
+1. `npx fuzznuxt your-project-name` - this will create a new directory called `your-project-name` in your current location and set up the boilerplate there.
 1. Copy `.env.example` as `.env` and add the appropriate Prismic API URL.
 1. `npm run dev`
 1. Set up Prismic:
