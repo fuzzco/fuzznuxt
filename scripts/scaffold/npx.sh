@@ -38,15 +38,6 @@ degit "fuzzco/fuzznuxt#npx" "$1" --force
 echo $ORIGINAL_PACKAGE_JSON > "$1/package.json"
 prettier --write "$1/package.json"
 
-# move all dirs up a level
-# (doing this instead of degit -f so we don't replace package.json)
-# cp -r "$FUZZCO_BOILERPLATE_DIR/*/" ./
-# TODO: fix this, not working
-# DIRS=$(ls -d fuzzco-boilerplate/*/)
-# while read -r line; do
-#     cp -r "$line" "${line/FUZZCO_BOILERPLATE_DIR/""}"
-# done < "$DIRS"
-
 cd "$1"
 atom .
 

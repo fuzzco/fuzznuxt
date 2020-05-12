@@ -5,7 +5,7 @@
     "author": "Fuzzco",
     "private": true,
     "bin": {
-        "fuzznuxt": "./scripts/npx.js"
+        "fuzznuxt": "./scripts/scaffold/npx.sh"
     },
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
