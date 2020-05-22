@@ -30,6 +30,9 @@
                 </transition>
             </template>
         </component>
+
+        <!-- Useful for overlays, etc -->
+        <slot />
     </component>
 </template>
 

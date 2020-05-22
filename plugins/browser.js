@@ -31,7 +31,7 @@ export default async ({ store, route }, inject) => {
     Vue.component('a-div', require('~/components/ADiv.vue').default)
     Vue.component(
         'prismic-image',
-        require('~/components/PrismicImage.vue').default
+        require('~/components/prismic/Image.vue').default
     )
     Vue.component(
         'prismic-content',
