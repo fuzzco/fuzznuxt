@@ -53,7 +53,14 @@ const universal = {
         ],
         link: [
             { rel: 'icon', href: '/images/favicon.png' },
-            { rel: 'stylesheet', href: '/fonts/fonts.css' }
+            { rel: 'stylesheet', href: '/fonts/fonts.css' },
+            // Add for each font in your project
+            // {
+            //     rel: 'preload',
+            //     href: '/fonts/YOUR_FONT.woff2',
+            //     as: 'font',
+            //     crossorigin: 'anonymous'
+            // },
         ],
         script: [
             {
