@@ -10,9 +10,14 @@ export const wait = (time = 1000) => new Promise(res => setTimeout(res, time))
 // wait an element to appear in the doc
 export const waitFor = async function(selector, opts = {}) {
     // set defaults
-    opts = { timeout: 2000, interval: 100, ...opts }
+    opts = {
+        timeout: 2000,
+        interval: 100,
+        scope: document,
+        ...opts
+    }
 
-    const lookForEl = () => document.querySelector(selector)
+    const lookForEl = () => opts.scope.querySelector(selector)
     let checker
 
     const checkerPromise = () =>

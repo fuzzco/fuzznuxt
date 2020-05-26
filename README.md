@@ -84,14 +84,14 @@ Contains common helper functions. Usage:
 
 Functions:
 
-| Name       | Parameters                                   | Notes                                                                                                                 |
-| ---------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `bezier`   | `(p0, p1, p2, p3)`                           | Construct a bezier curve from four points. See [here](https://cubic-bezier.com) for a visualizer.                     |
-| `lerp`     | `(from, to, alpha)`                          | Lerp between `from` and `to`. `alpha` should be between 0 and 1.                                                      |
-| `scrollTo` | `(el, duration = 1000, offset = 0)`          | Scroll to `el` (plus `offset`) over `duration` ms. Awaitable. Fails silently if no `el`.                              |
-| `scrollUp` | `(duration = 1000)`                          | Scroll to the top of the page over `duration` ms.                                                                     |
-| `wait`     | `(time = 1000)`                              | Wait `time` ms. Awaitable.                                                                                            |
-| `waitFor`  | `(selector, {timeout: 2000, interval: 100})` | Wait `timeout` ms for an element matching `selector` to appear. `const element = await waitFor('.uncertain-element')` |
+| Name       | Parameters                                                    | Notes                                                                                                                            |
+| ---------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `bezier`   | `(p0, p1, p2, p3)`                                            | Construct a bezier curve from four points. See [here](https://cubic-bezier.com) for a visualizer.                                |
+| `lerp`     | `(from, to, alpha)`                                           | Lerp between `from` and `to`. `alpha` should be between 0 and 1.                                                                 |
+| `scrollTo` | `(el, duration = 1000, offset = 0)`                           | Scroll to `el` (plus `offset`) over `duration` ms. Awaitable. Fails silently if no `el`.                                         |
+| `scrollUp` | `(duration = 1000)`                                           | Scroll to the top of the page over `duration` ms.                                                                                |
+| `wait`     | `(time = 1000)`                                               | Wait `time` ms. Awaitable.                                                                                                       |
+| `waitFor`  | `(selector, {timeout: 2000, interval: 100, scope: document})` | Wait `timeout` ms for an element in `scope` matching `selector` to appear. `const element = await waitFor('.uncertain-element')` |
 
 ### Mixins
 
