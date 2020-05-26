@@ -50,7 +50,7 @@ By default, this repo uses the `prismic-content` component to handle rendering c
 1. Uncomment the `require(...ContentFull.vue)` line from that same file.
 1. Uncomment the `universal.build.extend` function in `nuxt.config.js`.
 
-This will replace links that start with a slash with `nuxt-link` components (so in Prismic, creating a web link to `/news` would result in a seamless transition when clicked).
+This will replace links that start with a slash with `nuxt-link` components (so in Prismic, creating a web link to `/news` would result in a seamless transition when clicked). The main downside of this option is a slightly larger build size, since `prismic-content-full` requires the full Vue build to render at runtime.
 
 ## Flow
 
