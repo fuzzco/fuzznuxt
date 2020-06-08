@@ -53,7 +53,7 @@ const universal = {
         ],
         link: [
             { rel: 'icon', href: '/images/favicon.png' },
-            { rel: 'stylesheet', href: '/fonts/fonts.css' },
+            { rel: 'stylesheet', href: '/fonts/fonts.css' }
             // Add for each font in your project
             // {
             //     rel: 'preload',
@@ -89,7 +89,8 @@ const universal = {
     modules: [
         '@nuxtjs/style-resources',
         '@nuxtjs/device',
-        '@nuxtjs/component-cache'
+        '@nuxtjs/component-cache',
+        '@nuxtjs/prismic'
     ],
 
     /*
@@ -101,6 +102,14 @@ const universal = {
         // '~/plugins/global-components',
         // '~/plugins/global-filters'
     ],
+
+    /*
+     * Prismic
+     */
+    prismic: {
+        endpoint: process.env.PRISMIC_URL,
+        linkResolver: '~/libs/prismic/linkResolver'
+    },
 
     /*
      * Router

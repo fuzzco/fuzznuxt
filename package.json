@@ -34,6 +34,7 @@
         "@fuzzco/vue-marquee": "^1.0.1",
         "@nuxtjs/component-cache": "1.1.5",
         "@nuxtjs/device": "^1.2.4",
+        "@nuxtjs/prismic": "1.2.1",
         "@nuxtjs/style-resources": "^0.1.2",
         "@popmotion/popcorn": "^0.4.0",
         "auto-blur": "^1.1.2",
