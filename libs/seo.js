@@ -1,6 +1,6 @@
 export default function(found, fallback, store) {
     const description =
-        _get(found, 'seo_description', '') || fallback.seo_description
+        _get(found, 'data.seo_description', '') || fallback.seo_description
 
     store.commit('SET_DESCRIPTION', description)
 
