@@ -32,7 +32,7 @@ find $1 -name "README*" -delete -o -name Logo.vue -delete -o -name index.vue -de
 ORIGINAL_PACKAGE_JSON="$(cat "$1/package.json")"
 
 # degit boilerplate
-degit "fuzzco/fuzznuxt#npx" "$1" --force
+degit "fuzzco/fuzznuxt" "$1" --force
 
 # replace boilerplate package.json
 echo $ORIGINAL_PACKAGE_JSON > "$1/package.json"
@@ -44,3 +44,6 @@ atom .
 # install dependencies
 npm i node-sass sass-loader @nuxtjs/style-resources concurrently @babel/core -D
 npm i dotenv fitvids hammerjs js-cookie @fuzzco/font-loader @nuxtjs/component-cache @nuxtjs/device auto-blur cross-fetch lodash popmotion prismic-dom prismic-javascript v-runtime-template
+
+# one final install to make sure everything is ready
+npm i
