@@ -16,7 +16,8 @@ export const state = () => {
         dataLoading: false,
         mouseX: 0,
         mouseY: 0,
-        observer: null
+        observer: null,
+        prefersReducedMotion: true
     }
 }
 
@@ -97,6 +98,9 @@ export const mutations = {
         } else {
             state.observer.observe(el)
         }
+    },
+    SET_PREFERS_REDUCED_MOTION: (state, newVal) => {
+        state.prefersReducedMotion = newVal
     }
 }
 

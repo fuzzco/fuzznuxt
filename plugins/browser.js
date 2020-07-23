@@ -45,4 +45,11 @@ export default async ({ store, route }, inject) => {
     autoBlur()
     autoBlur('A')
     autoBlur('SUMMARY')
+
+    // prefers-reduced-motion
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    store.commit('browser/SET_PREFERS_REDUCED_MOTION', mediaQuery.matches)
+    mediaQuery.addEventListener('change', () => {
+        store.commit('browser/SET_PREFERS_REDUCED_MOTION', mediaQuery.matches)
+    })
 }
