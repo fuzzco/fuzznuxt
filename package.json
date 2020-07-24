@@ -52,6 +52,7 @@
         "popmotion": "^8.6.4",
         "prismic-dom": "^2.1.0",
         "prismic-javascript": "^2.0.2",
+        "prismic-vue": "2.0.1",
         "qs": "^6.7.0",
         "redirect-ssl": "^1.4.0",
         "screenfull": "^4.2.0",
