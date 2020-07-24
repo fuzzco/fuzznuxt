@@ -3,43 +3,36 @@ import Prismic from 'prismic-javascript'
 
 const PRISMIC_MAX_PAGES_PER_QUERY = 100
 
-// helper to init API
-const CACHE_TIME = 3 * 60 * 1000
-let api, stamp
-const getApi = () => {
-    const isExpired = new Date().getTime() - stamp > CACHE_TIME
-    if (!api || isExpired) {
-        stamp = new Date().getTime()
-        api = Prismic.api(process.env.PRISMIC_URL)
-    }
-    return api
-}
-
 // Query by type
-export const fetchByType = async ops => {
+export const prismicQuery = async opts => {
     try {
-        const api = await getApi()
+        // resolve opts
+        opts = {
+            type: 'page',
+            slug: '',
+            pageSize: PRISMIC_MAX_PAGES_PER_QUERY,
+            page: 1,
+            orderings: '',
+            $prismic: this ? this.$prismic : null,
+            ...opts
+        }
 
-        // resolve settings
-        const settings = Object.assign(
-            {
-                type: 'page',
-                slug: '',
-                pageSize: PRISMIC_MAX_PAGES_PER_QUERY,
-                page: 1,
-                orderings: ''
-            },
-            ops
-        )
+        if (!opts.$prismic) {
+            throw new Error(
+                'Include a $prismic option to fetch. See https://prismic.io/docs/vuejs/getting-started/the-new-prismic-nuxt-module#7_0-queries'
+            )
+        }
+
+        const api = opts.$prismic.api
 
         const predicates = [
-            Prismic.Predicates.at('document.type', settings.type)
+            opts.$prismic.predicates.at('document.type', opts.type)
         ]
 
         // if slug was specified
-        if (settings.slug) {
-            const artist = await api.getByUID(settings.type, settings.slug)
-            return artist
+        if (opts.slug) {
+            const result = await api.getByUID(opts.type, opts.slug)
+            return result
         }
 
         // run query (ensures we get all of a desired type - we ran into a bug
@@ -50,9 +43,9 @@ export const fetchByType = async ops => {
         do {
             // run query against current page of results
             latestQuery = await api.query(predicates, {
-                pageSize: settings.pageSize,
+                pageSize: opts.pageSize,
                 page: page++,
-                orderings: settings.orderings
+                orderings: opts.orderings
             })
             // if we get a valid result, add that result to our master output
             if (latestQuery && Array.isArray(latestQuery.results)) {

@@ -10,10 +10,14 @@ import { head } from '~/mixins'
 
 export default {
     mixins: [head],
-    async asyncData({ store, params, error }) {
+    async asyncData({ $prismic, store, params, error }) {
+        const { slug } = params
+
         const found = await store.dispatch('FETCH_BY_SLUG', {
-            slug: params.slug || 'front-page'
+            slug: slug || 'front-page',
+            $prismic
         })
+
         if (!found) return error({ statusCode: 404, message: 'Not found' })
 
         const fallback = store.state.pageData.settings
@@ -27,10 +31,11 @@ export default {
 //
 // export default {
 //     mixins: [head],
-//     async fetch({ store, params, error }) {
+//     async fetch({ $prismic, store, params, error }) {
 //         const found = await store.dispatch('FETCH_BY_SLUG', {
 //             type: 'your-type',
-//             slug: 'your-slug'
+//             slug: 'your-slug',
+//             $prismic
 //         })
 //         if (!found) return error({ statusCode: 404, message: 'Not found' })
 //     }

@@ -1,7 +1,14 @@
-import { fetchByType } from '~/libs/prismic'
+import { prismicQuery } from '~/libs/prismic'
 import Cookies from 'js-cookie'
 import Vuex from 'vuex'
 import Vue from 'vue'
+
+// utility error function
+function $prismicError() {
+    throw new Error(
+        'Include a $prismic option to fetch. See https://prismic.io/docs/vuejs/getting-started/the-new-prismic-nuxt-module#7_0-queries'
+    )
+}
 
 export const state = () => {
     return {
@@ -26,12 +33,14 @@ export const mutations = {
 }
 
 export const actions = {
-    FETCH_SINGLETON_TYPE: async ({ commit, state }, { type }) => {
+    FETCH_SINGLETON_TYPE: async ({ commit, state }, opts) => {
+        const { type } = opts
+
         // check if we already have data to return immediately
         if (state.pageData[type]) return state.pageData[type]
 
         // query Prismic
-        const docs = await fetchByType({ type })
+        const docs = await prismicQuery(opts)
 
         if (docs && docs.length) {
             const data = docs[0]
@@ -53,10 +62,19 @@ export const actions = {
             opts = { slug: opts }
         }
 
-        // slug fallback to `front-page`
-        opts.slug = opts.hasOwnProperty('slug') ? opts.slug : 'front-page'
-        // type fallback to empty
-        opts.type = opts.hasOwnProperty('type') ? opts.type : 'page'
+        // defaults
+        opts = {
+            slug: 'front-page',
+            type: 'page',
+            $prismic: null,
+            ...opts
+        }
+
+        // if no $prismic passed, return error
+        if (!opts.$prismic) {
+            $prismicError()
+            return null
+        }
 
         // build key
         const key = `${opts.type}/${opts.slug}`
@@ -65,7 +83,7 @@ export const actions = {
         if (state.pageData[key]) return state.pageData[key]
 
         // query Prismic
-        const data = await fetchByType(opts)
+        const data = await prismicQuery(opts)
 
         if (data) {
             commit('SET_PAGE_DATA', {
