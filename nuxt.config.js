@@ -19,6 +19,9 @@ const universal = {
         // }
     },
 
+    // Uncomment if making static-only build
+    // target: 'static',
+
     /*
      * Global CSS
      */
@@ -97,10 +100,9 @@ const universal = {
      * Plugins
      */
     plugins: [
-        { src: '~/plugins/browser', ssr: false },
-        '~/plugins/bootstrap'
+        '~/plugins/bootstrap.server.js',
+        '~/plugins/browser.client.js'
         // '~/plugins/global-components',
-        // '~/plugins/global-filters'
     ],
 
     /*

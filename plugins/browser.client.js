@@ -4,7 +4,7 @@ import {
     mouseMoveHandler,
     resizeHandler,
     scrollHandler
-} from '~/plugins/dom-handlers'
+} from '~/libs/dom-handlers'
 import Vue from 'vue'
 
 // plugin
