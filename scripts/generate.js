@@ -45,9 +45,6 @@ const routes = async () => {
     )
 }
 
-console.log('start')
-routes().then(console.log)
-
 module.exports = {
     routes,
     interval: 250,
