@@ -10,7 +10,7 @@
         "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
         "build": "nuxt build",
         "start": "nuxt start",
-        "generate": "nuxt generate",
+        "generate": "nuxt build && nuxt export",
         "test": "npm run generate; http-server dist & FUZZNUXT_SRV_PID=$!; node test; kill -9 $FUZZNUXT_SRV_PID",
         "heroku-postbuild": "npm run build",
         "fonts": "sh bash/fonts.sh",

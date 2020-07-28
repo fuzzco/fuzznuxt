@@ -19,8 +19,7 @@ const universal = {
         // }
     },
 
-    // Uncomment if making static-only build
-    // target: 'static',
+    target: 'static',
 
     /*
      * Global CSS
