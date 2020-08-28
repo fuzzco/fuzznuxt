@@ -1,6 +1,3 @@
-import { transform } from 'popmotion'
-const { interpolate } = transform
-
 // mouse move handler
 export const mouseMoveHandler = (evt, store) => {
     const pos = {
