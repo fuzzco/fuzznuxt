@@ -100,8 +100,8 @@ const universal = {
      */
     plugins: [
         '~/plugins/bootstrap.server.js',
-        '~/plugins/browser.client.js'
-        // '~/plugins/global-components',
+        '~/plugins/browser.client.js',
+        '~/plugins/global-components.js'
     ],
 
     /*
