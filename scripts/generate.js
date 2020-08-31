@@ -5,7 +5,7 @@ dotenv.config()
 const PRISMIC_MAX_PAGES_PER_QUERY = 100
 
 // list of extra paths to add
-const pagesToAdd = []
+const pagesToAdd = ['/']
 // paths to skip (for example, if already covered in a `pages/x.vue` template)
 const pagesToSkip = ['front-page']
 

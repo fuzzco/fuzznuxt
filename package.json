@@ -54,7 +54,7 @@
         "prismic-javascript": "^2.0.2",
         "prismic-vue": "2.0.1",
         "qs": "^6.7.0",
-        "redirect-ssl": "^1.4.0",
+        "redirect-ssl": "1.4.1",
         "screenfull": "^4.2.0",
         "v-runtime-template": "1.10.0",
         "vue": "2.6.11"
