@@ -43,7 +43,7 @@ atom .
 
 # install dependencies
 npm i node-sass sass-loader @nuxtjs/style-resources concurrently @babel/core -D
-npm i dotenv fitvids hammerjs js-cookie @fuzzco/font-loader @nuxtjs/component-cache @nuxtjs/device auto-blur cross-fetch lodash popmotion prismic-dom prismic-javascript v-runtime-template
+npm i dotenv fitvids hammerjs js-cookie @fuzzco/font-loader @nuxtjs/component-cache @nuxtjs/device auto-blur cross-fetch lodash popmotion prismic-dom prismic-javascript @nuxtjs/prismic imagesloaded v-runtime-template
 
 # one final install to make sure everything is ready
 npm i
