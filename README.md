@@ -276,7 +276,7 @@ Publish directory       dist
 and the environment variables to:
 
 ```
-PRISMIC_URL             (your Prismic API URL)
+PRISMIC_REPO_NAME       (your Prismic repo name)
 ```
 
 ### Heroku
@@ -296,5 +296,5 @@ On Heroku's end, remember to set these environment variables:
 HOST                    0.0.0.0
 NODE_ENV                production
 NPM_CONFIG_PRODUCTION   false
-PRISMIC_URL             (your Prismic API URL)
+PRISMIC_REPO_NAME       (your Prismic repo name)
 ```

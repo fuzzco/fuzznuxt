@@ -15,7 +15,9 @@ const routes = async () => {
     const results = []
     let latestQuery = null
     let page = 1
-    const api = await Prismic.getApi(process.env.PRISMIC_URL)
+    const api = await Prismic.getApi(
+        `https://${process.env.PRISMIC_REPO_NAME}.cdn.prismic.io/api/v2`
+    )
 
     do {
         // run query against current page of results

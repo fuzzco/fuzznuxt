@@ -108,8 +108,12 @@ const universal = {
      * Prismic
      */
     prismic: {
-        endpoint: process.env.PRISMIC_URL,
-        linkResolver: '~/libs/prismic/linkResolver'
+        endpoint: `https://${
+            process.env.PRISMIC_REPO_NAME
+        }.cdn.prismic.io/api/v2`,
+        linkResolver: '~/libs/prismic/linkResolver',
+        htmlSerializer: '~/libs/prismic/htmlSerializer',
+        components: false
     },
 
     /*

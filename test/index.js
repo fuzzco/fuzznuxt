@@ -16,7 +16,9 @@ const getApi = async () => {
     const isExpired = new Date().getTime() - stamp > CACHE_TIME
     if (!api || isExpired) {
         stamp = new Date().getTime()
-        api = Prismic.api(process.env.PRISMIC_URL)
+        api = Prismic.api(
+            `https://${process.env.PRISMIC_REPO_NAME}.cdn.prismic.io/api/v2`
+        )
     }
     return api
 }
@@ -56,7 +58,7 @@ const run = async () => {
         // cancel if none
         if (!slugs.length) {
             console.log(
-                `No pages found. Is Prismic set up correctly?\n\n- Check .env file and make sure PRISMIC_URL is set to a valid Prismic API URL.\n\nExiting tests.`
+                `No pages found. Is Prismic set up correctly?\n\n- Check .env file and make sure PRISMIC_REPO_NAME is set to a valid Prismic repo.\n\nExiting tests.`
                     .yellow
             )
 
