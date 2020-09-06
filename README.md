@@ -29,8 +29,8 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
 1. Copy `.env.example` as `.env` and add the appropriate Prismic API URL.
 1. `npm run dev`
 1. Set up Prismic:
-    1. **Pages**: Create a custom type called `page` with the a UID field called `slug`. Create a Page with the slug `front-page`. This is the content that will appear on `pages/index.vue`
-    1. **Settings**: Create a custom type called `settings`. This is the content that will be used for global site settings.
+    1. **Pages**: Create a repeatable custom type called `page` with the a UID field called `slug`. Create a Page with the slug `front-page`. This is the content that will appear on `pages/index.vue`
+    1. **Settings**: Create a single custom type called `settings`. This is the content that will be used for global site settings.
     1. **Previews**: Make a new preview with the name `production`, add your Netlify domain, and set the link resolver to `/preview`. Ensure `libs/prismic/linkResolver.js` makes sense with your site structure.
 
 ### Fonts
@@ -143,9 +143,9 @@ Adds several slideshow functions and properties. Sets left/right arrow key liste
             return {
                 slides: [
                     /* your slides here */
-                ]
+                ],
             }
-        }
+        },
     }
 </script>
 ```
@@ -180,8 +180,8 @@ Wrapper for a Prismic image. Features:
         computed: {
             myImage() {
                 // return an image from a Prismic content type or slice here
-            }
-        }
+            },
+        },
     }
 </script>
 ```
