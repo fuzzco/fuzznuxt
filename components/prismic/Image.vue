@@ -13,7 +13,7 @@
                     :width="cmpWidth"
                     :height="cmpHeight"
                     aria-hidden="true"
-                    v-if="!hidePreview"
+                    v-if="!hidePreview && allowCompression"
                 />
                 <transition :name="transition">
                     <img
@@ -45,79 +45,79 @@ export default {
     props: {
         wrapper: {
             type: String,
-            default: 'div'
+            default: 'div',
         },
         src: {
             type: String,
-            default: ''
+            default: '',
         },
         aspect: {
             type: [String, Number],
-            default: -1
+            default: -1,
         },
         innerWrapper: {
             type: String,
-            default: 'div'
+            default: 'div',
         },
         sizes: {
             type: Array,
-            default: () => defaultSizes
+            default: () => defaultSizes,
         },
         transition: {
             type: String,
-            default: 'fade'
+            default: 'fade',
         },
         hidePreview: {
             type: Boolean,
-            default: false
+            default: false,
         },
         fillSpace: {
             type: Boolean,
-            default: false
+            default: false,
         },
         fit: {
             type: String,
-            default: 'cover'
+            default: 'cover',
         },
         respectMax: {
             type: Boolean,
-            default: false
+            default: false,
         },
         scaleMax: {
             type: Number,
-            default: 1
+            default: 1,
         },
         ignoreSrcset: {
             type: Boolean,
-            default: false
+            default: false,
         },
         noCompress: {
             type: Boolean,
-            default: false
+            default: false,
         },
         defer: {
             type: Boolean,
-            default: false
+            default: false,
         },
         // props from Prismic
         dimensions: {
             type: Object,
-            default: { width: -1, height: -1 }
+            default: { width: -1, height: -1 },
         },
         alt: {
             type: String,
-            default: ''
+            default: '',
         },
         url: {
             type: String,
-            default: ''
-        }
+            default: '',
+        },
         // end props from Prismic
     },
     data() {
         return {
             loaded: false,
-            inLoadRange: false
+            inLoadRange: false,
         }
     },
     async mounted() {
@@ -129,11 +129,20 @@ export default {
         }
     },
     computed: {
+        allowCompression() {
+            const output = this.url || this.src
+
+            return !(
+                this.noCompress ||
+                output.includes('.gif') ||
+                output.includes('.svg')
+            )
+        },
         cmpUrl() {
             const output = this.url || this.src
 
             // gif files can't use compression, so let's force the full URL
-            if (this.noCompress || output.includes('.gif')) {
+            if (!this.allowCompression) {
                 return output.replace(/\?.*$/, '')
             }
             return output
@@ -166,10 +175,15 @@ export default {
             }
 
             return this.sizes
-                .map(size => {
+                .map((size) => {
                     const width = size === null ? this.cmpWidth : size
                     const height = Math.round(width / (this.cmpAspect / 100))
-                    return this.cmpUrl + `&w=${width}&h=${height} ${width}w`
+                    return (
+                        this.cmpUrl +
+                        (this.allowCompression
+                            ? `&w=${width}&h=${height} ${width}w`
+                            : '')
+                    )
                 })
                 .join(', ')
         },
@@ -184,7 +198,7 @@ export default {
         },
         tinyUrl() {
             return this.cmpUrl + `&w=2&h=2`
-        }
+        },
     },
     methods: {
         runLoadListener() {
@@ -207,7 +221,7 @@ export default {
                 // and tear down observers
                 this.runObserverTeardown()
             }
-        }
+        },
     },
     watch: {
         async inLoadRange(newVal) {
@@ -215,8 +229,8 @@ export default {
                 await this.$nextTick()
                 this.runLoadListener()
             }
-        }
-    }
+        },
+    },
 }
 </script>
 
@@ -224,7 +238,7 @@ export default {
 .prismic-image {
     position: relative;
     width: 100%;
-    max-width: var(--max-width);
+    // max-width: var(--max-width);
 
     .image-sizer {
         overflow: hidden;
