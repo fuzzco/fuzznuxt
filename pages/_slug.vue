@@ -1,6 +1,6 @@
 <template>
     <main class="page">
-        <nuxt-link to="/">Home</nuxt-link>
+        <prismic-slices :slices="page.body" />
     </main>
 </template>
 
@@ -10,19 +10,15 @@ import { head } from '~/mixins'
 
 export default {
     mixins: [head],
-    async asyncData({ $prismic, store, params, error }) {
-        const { slug } = params
-
-        const found = await store.dispatch('FETCH_BY_SLUG', {
-            slug: slug || 'front-page',
-            $prismic
-        })
-
-        if (!found) return error({ statusCode: 404, message: 'Not found' })
-
-        const fallback = store.state.pageData.settings
-        return seo(found, fallback, store)
-    }
+    async asyncData({ $prismic, error, params }) {
+        const doc = await $prismic.api.getByUID(
+            'page',
+            params && params.slug ? params.slug : 'front-page'
+        )
+        return {
+            page: doc ? doc.data : null,
+        }
+    },
 }
 
 // if fetchBySlug isn't enough, you can remove the above and use this:
