@@ -13,7 +13,7 @@ function $prismicError() {
 export const state = () => {
     return {
         pageData: {},
-        description: ''
+        description: '',
     }
 }
 
@@ -29,7 +29,7 @@ export const mutations = {
     },
     SET_BODY_SCROLL: (state, toScroll) => {
         document.body.classList[toScroll ? 'remove' : 'add']('scroll-prevented')
-    }
+    },
 }
 
 export const actions = {
@@ -48,7 +48,7 @@ export const actions = {
             // commit to store
             commit('SET_PAGE_DATA', {
                 key: `${type}`,
-                data
+                data,
             })
             return data
         }
@@ -67,7 +67,7 @@ export const actions = {
             slug: 'front-page',
             type: 'page',
             $prismic: null,
-            ...opts
+            ...opts,
         }
 
         // if no $prismic passed, return error
@@ -88,7 +88,7 @@ export const actions = {
         if (data) {
             commit('SET_PAGE_DATA', {
                 key,
-                data
+                data,
             })
 
             return data
@@ -96,5 +96,11 @@ export const actions = {
 
         // Not found
         return false
-    }
+    },
+}
+
+export const getters = {
+    settings(state) {
+        return get(state.pageData.settings, 'data', {})
+    },
 }
