@@ -18,6 +18,7 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
     1. [Components](#components)
         1. [Prismic Image](#prismic-image)
 1. [SEO](#seo-setup)
+1. [Forms](#forms)
 1. [Deployment](#deployment)
     1. [Netlify](#netlify)
     1. [Heroku](#heroku)
@@ -261,6 +262,10 @@ On each page-level component, use the `seo` lib:
 ```
 
 This will combine with the `head` mixin (`~/mixins/head`) to populate SEO fields for each page.
+
+## Forms
+
+See our [prismic-form](https://github.com/fuzzco/prismic-form) library for a solution to building forms in Prismic.
 
 ## Deployment
 
