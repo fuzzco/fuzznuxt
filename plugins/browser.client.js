@@ -3,7 +3,7 @@ import { autoBlur } from 'auto-blur'
 import {
     mouseMoveHandler,
     resizeHandler,
-    scrollHandler
+    scrollHandler,
 } from '~/libs/dom-handlers'
 import Vue from 'vue'
 
@@ -11,12 +11,18 @@ import Vue from 'vue'
 export default async ({ store, route }, inject) => {
     // setup dom listeners
     // ~16ms is 60fps
-    window.addEventListener('resize', throttle(() => resizeHandler(store), 16))
-    window.addEventListener('scroll', throttle(() => scrollHandler(store), 16))
-    window.addEventListener('mousemove', evt => {
+    window.addEventListener(
+        'resize',
+        throttle(() => resizeHandler(store), 16)
+    )
+    window.addEventListener(
+        'scroll',
+        throttle(() => scrollHandler(store), 16)
+    )
+    window.addEventListener('mousemove', (evt) => {
         mouseMoveHandler(evt, store)
     })
-    document.addEventListener('visibilitychange', evt => {
+    document.addEventListener('visibilitychange', (evt) => {
         store.commit(
             store.state.browser.windowBlurred
                 ? 'browser/SET_WINDOW_FOCUSSED'
@@ -49,7 +55,14 @@ export default async ({ store, route }, inject) => {
     // prefers-reduced-motion
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     store.commit('browser/SET_PREFERS_REDUCED_MOTION', mediaQuery.matches)
-    mediaQuery.addEventListener('change', () => {
-        store.commit('browser/SET_PREFERS_REDUCED_MOTION', mediaQuery.matches)
-    })
+    if (mediaQuery && mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', () => {
+            store.commit(
+                'browser/SET_PREFERS_REDUCED_MOTION',
+                mediaQuery.matches
+            )
+        })
+    }
+
+    resizeHandler(store)
 }
