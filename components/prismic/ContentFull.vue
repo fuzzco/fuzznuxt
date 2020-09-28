@@ -22,19 +22,19 @@ export default {
     props: {
         content: {
             type: Array,
-            default: () => []
+            default: () => [],
         },
         asText: {
             type: Boolean,
-            default: false
+            default: false,
         },
         wrapper: {
             type: String,
-            default: 'div'
-        }
+            default: 'div',
+        },
     },
     components: {
-        'v-runtime-template': vRuntimeTemplate
+        'v-runtime-template': vRuntimeTemplate,
     },
     computed: {
         formattedContent() {
@@ -47,7 +47,7 @@ export default {
                     ) +
                     '</div>' || ''
             )
-        }
+        },
     },
     async mounted() {
         await this.$nextTick()
@@ -58,7 +58,7 @@ export default {
             if (
                 element.type == 'hyperlink' &&
                 element.data.url &&
-                element.data.url.match(/^https?:\/\/\//)
+                element.data.url.match(/^https?:\/\/[\/#]/)
             ) {
                 return `<a-div :href="'${element.data.url.replace(
                     /^https?:\/\//,
@@ -66,13 +66,13 @@ export default {
                 )}'">${content}</a-div>`
             }
             return null
-        }
+        },
     },
     watch: {
         async content() {
             await this.$nextTick()
             fitvids('div[data-oembed]')
-        }
-    }
+        },
+    },
 }
 </script>
