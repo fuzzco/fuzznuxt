@@ -58,7 +58,7 @@ export default {
             if (
                 element.type == 'hyperlink' &&
                 element.data.url &&
-                element.data.url.match(/^https?:\/\/[\/#]/)
+                element.data.url.match(/^https?:\/\/[\/#?]/)
             ) {
                 return `<a-div :href="'${element.data.url.replace(
                     /^https?:\/\//,
