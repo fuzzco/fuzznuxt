@@ -1,4 +1,3 @@
-import { sampleSize as _sampleSize } from 'lodash'
 import Prismic from 'prismic-javascript'
 
 const PRISMIC_MAX_PAGES_PER_QUERY = 100

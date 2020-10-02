@@ -1,6 +1,6 @@
-import get from 'lodash'
+import get from 'lodash/get'
 
-export default function (found, fallback, store) {
+export default function(found, fallback, store) {
     fallback = fallback || {}
 
     const description =
@@ -13,6 +13,6 @@ export default function (found, fallback, store) {
         seoDescription: description,
         seoImage:
             get(found, 'seo_image.Small.url', '') ||
-            get(fallback, 'seo_image.Small.url', ''),
+            get(fallback, 'seo_image.Small.url', '')
     }
 }

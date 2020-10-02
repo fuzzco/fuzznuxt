@@ -1,4 +1,4 @@
-import { throttle as _throttle } from 'lodash'
+import throttle from 'lodash/throttle'
 
 export default {
     data() {
@@ -10,11 +10,11 @@ export default {
     mounted() {
         window.addEventListener(
             'scroll',
-            _throttle(this.setRect, this.rectThrottle)
+            throttle(this.setRect, this.rectThrottle)
         )
         window.addEventListener(
             'resize',
-            _throttle(this.setRect, this.rectThrottle)
+            throttle(this.setRect, this.rectThrottle)
         )
         this.$nextTick(this.setRect)
     },

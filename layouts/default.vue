@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { kebabCase as _kebabCase } from 'lodash'
+import kebabCase from 'lodash/kebabCase'
 
 export default {
     data() {
@@ -33,7 +33,7 @@ export default {
         classes() {
             return [
                 'container',
-                _kebabCase(this.$route.name),
+                kebabCase(this.$route.name),
                 { 'is-desktop': this.$device.isDesktop },
                 { 'is-mobile': this.$device.isMobileOrTablet },
                 {
