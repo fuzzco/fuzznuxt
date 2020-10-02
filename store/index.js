@@ -2,6 +2,7 @@ import { prismicQuery } from '~/libs/prismic'
 import Cookies from 'js-cookie'
 import Vuex from 'vuex'
 import Vue from 'vue'
+import get from 'lodash/get'
 
 // utility error function
 function $prismicError() {

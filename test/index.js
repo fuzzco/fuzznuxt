@@ -3,7 +3,7 @@
 const backstop = require('backstopjs')
 const Prismic = require('prismic-javascript')
 require('dotenv').config()
-const { get } = require('lodash')
+const get = require('lodash/get')
 const { spawn, execSync } = require('child_process')
 const colors = require('colors')
 const config = require('./config.json')
@@ -29,7 +29,7 @@ const getSlugs = async () => {
 
     const res = await api.query('', { pageSize: 100 })
     const results = get(res, 'results', [])
-    return (slugs = results.map(page => get(page, 'uid', '')).filter(Boolean))
+    return (slugs = results.map((page) => get(page, 'uid', '')).filter(Boolean))
 }
 
 // start server
@@ -77,15 +77,15 @@ const run = async () => {
         // run tests
         try {
             dynConfig = {
-                ...config
+                ...config,
             }
             const url = config.scenarios[0].url + '/'
             slugs
-                .filter(slug => slug !== 'front-page')
-                .forEach(slug => {
+                .filter((slug) => slug !== 'front-page')
+                .forEach((slug) => {
                     dynConfig.scenarios.push({
                         label: slug,
-                        url: url + slug
+                        url: url + slug,
                     })
                 })
 
@@ -107,7 +107,7 @@ const run = async () => {
                 const raw = await prompts({
                     type: 'text',
                     name: 'approval',
-                    message: 'Approve new versions? (y/N)'
+                    message: 'Approve new versions? (y/N)',
                 })
                 response = raw.approval
             }

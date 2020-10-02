@@ -8,20 +8,22 @@
 </template>
 
 <script>
+import get from 'lodash/get'
+
 export default {
     props: {
         link: {
             type: Object,
-            required: true
-        }
+            required: true,
+        },
     },
     computed: {
         isExternal() {
-            return _get(this.link, 'link_type') == 'Web'
+            return get(this.link, 'link_type') == 'Web'
         },
         target() {
-            return _get(this.link, 'target', '_self')
-        }
-    }
+            return get(this.link, 'target', '_self')
+        },
+    },
 }
 </script>

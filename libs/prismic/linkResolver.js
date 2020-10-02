@@ -1,6 +1,6 @@
-import { get } from 'lodash'
+import get from 'lodash/get'
 
-const resolver = doc => {
+const resolver = (doc) => {
     if (doc == undefined) {
         return '/not-found-undefined'
     }

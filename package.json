@@ -34,11 +34,11 @@
         "@fuzzco/vue-marquee": "^1.0.1",
         "@nuxtjs/component-cache": "1.1.5",
         "@nuxtjs/device": "^1.2.4",
-        "@nuxtjs/prismic": "1.2.1",
+        "@nuxtjs/prismic": "1.2.4",
         "@nuxtjs/style-resources": "^0.1.2",
         "@popmotion/popcorn": "^0.4.0",
         "auto-blur": "^1.1.2",
-        "cross-fetch": "^3.0.2",
+        "cross-fetch": "3.0.6",
         "current-device": "^0.8.0",
         "express": "^4.16.4",
         "fh-components": "^1.4.15",
@@ -57,7 +57,8 @@
         "redirect-ssl": "1.4.1",
         "screenfull": "^4.2.0",
         "v-runtime-template": "1.10.0",
-        "vue": "2.6.11"
+        "vue": "2.6.12",
+        "vue-template-compiler": "2.6.12"
     },
     "devDependencies": {
         "@vue/test-utils": "^1.0.0-beta.27",
