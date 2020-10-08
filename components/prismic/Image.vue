@@ -45,79 +45,79 @@ export default {
     props: {
         wrapper: {
             type: String,
-            default: 'div',
+            default: 'div'
         },
         src: {
             type: String,
-            default: '',
+            default: ''
         },
         aspect: {
             type: [String, Number],
-            default: -1,
+            default: -1
         },
         innerWrapper: {
             type: String,
-            default: 'div',
+            default: 'div'
         },
         sizes: {
             type: Array,
-            default: () => defaultSizes,
+            default: () => defaultSizes
         },
         transition: {
             type: String,
-            default: 'fade',
+            default: 'fade'
         },
         hidePreview: {
             type: Boolean,
-            default: false,
+            default: false
         },
         fillSpace: {
             type: Boolean,
-            default: false,
+            default: false
         },
         fit: {
             type: String,
-            default: 'cover',
+            default: 'cover'
         },
         respectMax: {
             type: Boolean,
-            default: false,
+            default: false
         },
         scaleMax: {
             type: Number,
-            default: 1,
+            default: 1
         },
         ignoreSrcset: {
             type: Boolean,
-            default: false,
+            default: false
         },
         noCompress: {
             type: Boolean,
-            default: false,
+            default: false
         },
         defer: {
             type: Boolean,
-            default: false,
+            default: false
         },
         // props from Prismic
         dimensions: {
             type: Object,
-            default: { width: -1, height: -1 },
+            default: { width: -1, height: -1 }
         },
         alt: {
             type: String,
-            default: '',
+            default: ''
         },
         url: {
             type: String,
-            default: '',
-        },
+            default: ''
+        }
         // end props from Prismic
     },
     data() {
         return {
             loaded: false,
-            inLoadRange: false,
+            inLoadRange: false
         }
     },
     async mounted() {
@@ -175,7 +175,7 @@ export default {
             }
 
             return this.sizes
-                .map((size) => {
+                .map(size => {
                     const width = size === null ? this.cmpWidth : size
                     const height = Math.round(width / (this.cmpAspect / 100))
                     return (
@@ -198,7 +198,7 @@ export default {
         },
         tinyUrl() {
             return this.cmpUrl + `&w=2&h=2`
-        },
+        }
     },
     methods: {
         runLoadListener() {
@@ -215,13 +215,16 @@ export default {
             if (!observerData) return
 
             // if we do, check if the top or bottom are within loadRange
-            if (observerData.isIntersecting) {
+            if (
+                observerData.boundingClientRect.top <=
+                this.$store.state.browser.winHeight * 2
+            ) {
                 // mark as within range
                 this.inLoadRange = true
                 // and tear down observers
                 this.runObserverTeardown()
             }
-        },
+        }
     },
     watch: {
         async inLoadRange(newVal) {
@@ -229,8 +232,8 @@ export default {
                 await this.$nextTick()
                 this.runLoadListener()
             }
-        },
-    },
+        }
+    }
 }
 </script>
 
