@@ -19,14 +19,10 @@ body {
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased !important;
     text-rendering: optimizeLegibility !important;
-    overflow-x: hidden;
 
     &.scroll-prevented {
         overflow: hidden;
     }
-}
-button {
-    @include button-reset;
 }
 h1,
 h2,
@@ -60,7 +56,7 @@ a {
 }
 
 // resets
-.content-reset {
+.prismic-content:not(.default-styling) {
     & > *:first-child {
         margin-top: 0;
     }
@@ -68,13 +64,14 @@ a {
         margin-bottom: 0;
     }
 }
-.button-reset {
+button:not(.default-styling) {
     @include button-reset;
 }
+// this is opt-in because prismic-content ul's usually need default styling
 .ul-reset {
     @include ul-reset;
 }
-.input-reset {
+input:not(.default-styling) {
     @include input-reset;
 }
 
