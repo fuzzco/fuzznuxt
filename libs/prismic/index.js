@@ -8,6 +8,7 @@ export const prismicQuery = async opts => {
         // resolve opts
         opts = {
             type: 'page',
+            uid: '',
             slug: '',
             pageSize: PRISMIC_MAX_PAGES_PER_QUERY,
             page: 1,
@@ -28,9 +29,9 @@ export const prismicQuery = async opts => {
             opts.$prismic.predicates.at('document.type', opts.type)
         ]
 
-        // if slug was specified
-        if (opts.slug) {
-            const result = await api.getByUID(opts.type, opts.slug)
+        // if UID or slug was specified
+        if (opts.uid || opts.slug) {
+            const result = await api.getByUID(opts.type, opts.uid || opts.slug)
             return result
         }
 
