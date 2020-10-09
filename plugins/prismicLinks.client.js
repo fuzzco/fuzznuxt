@@ -9,7 +9,11 @@ export default async ({ redirect }) => {
             event.preventDefault()
 
             // Push link destination to router
-            redirect(event.target.pathname)
+            redirect(
+                `${event.target.pathname}${event.target.search}${
+                    event.target.hash
+                }`
+            )
         },
         false
     )

@@ -7,14 +7,7 @@
 </template>
 
 <script>
-// NOTE:
-// This will not handle relative links in body content correctly.
-// For that to work, switch `prismic-content` to `prismic-content-full`.
-// See `~/components/prismic/ContentFull.vue` for more info.
-
-import linkResolver from '~/libs/prismic/linkResolver'
-import { RichText } from 'prismic-dom'
-import fitvids from 'fitvids'
+// import fitvids from 'fitvids'
 
 export default {
     props: {
@@ -38,12 +31,12 @@ export default {
     },
     async mounted() {
         await this.$nextTick()
-        fitvids('div[data-oembed]')
+        // fitvids('div[data-oembed]')
     },
     watch: {
         async content() {
             await this.$nextTick()
-            fitvids('div[data-oembed]')
+            // fitvids('div[data-oembed]')
         }
     }
 }

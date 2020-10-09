@@ -8,15 +8,33 @@ export default function(type, element, content, children) {
     // Present by default, it is recommended to keep this
     if (type === Elements.hyperlink) {
         let result = ''
-        const url = prismicDOM.Link.url(element.data, linkResolver)
+        let url = prismicDOM.Link.url(element.data, linkResolver)
 
         if (element.data.link_type === 'Document') {
             result = `<a href="${url}" data-nuxt-link>${content}</a>`
         } else {
+            // prep attributes
+            const attributes = []
+
+            // set target
             const target = element.data.target
                 ? `target="'${element.data.target}'" rel="noopener"`
                 : ''
-            result = `<a href="${url}" ${target}>${content}</a>`
+
+            // if a relative, hash, or query string (/, #, ?),
+            // remove initial https
+            if (url.match(/^https?:\/\/[\/#?]/)) {
+                url = element.data.url.replace(/^https?:\/\//, '')
+
+                // if (url.startsWith('/')) {
+                attributes.push('data-nuxt-link')
+                // }
+            }
+
+            // set output html
+            result = `<a href="${url}" ${target} ${attributes.join(
+                ' '
+            )}>${content}</a>`
         }
         return result
     }

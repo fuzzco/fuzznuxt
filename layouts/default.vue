@@ -5,7 +5,7 @@
         <site-header />
         <div class="site-container">
             <transition name="fade" mode="out-in">
-                <nuxt :key="$route.fullPath" />
+                <nuxt :key="$route.path" />
             </transition>
         </div>
         <site-footer />
