@@ -25,10 +25,7 @@ export default function(type, element, content, children) {
             // remove initial https
             if (url.match(/^https?:\/\/[\/#?]/)) {
                 url = element.data.url.replace(/^https?:\/\//, '')
-
-                // if (url.startsWith('/')) {
                 attributes.push('data-nuxt-link')
-                // }
             }
 
             // set output html

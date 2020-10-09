@@ -4,7 +4,7 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
 
 1. [Installation](#installation)
     1. [Fonts](#fonts)
-    1. [`prismic-content-full`](#prismic-content-full)
+    1. [`prismic-content`](#prismic-content)
 1. [Flow](#flow)
 1. [Included](#included)
     1. [Libs](#libs)
@@ -43,15 +43,9 @@ Fuzznuxt comes with a script to make font preparation easier.
 1. Drag the downloaded `arcive.zip` to the root directory of your Fuzznuxt project.
 1. Run `npm run fonts`. This will execute `bash/fonts.sh`, which will unzip and organize the fonts from the `arcive.zip` file into the `static/fonts` folder and remove the `arcive.zip` file.
 
-### `prismic-content-full`
+### `prismic-content`
 
-By default, this repo uses the `prismic-content` component to handle rendering content from the Prismic WYSIWYG editor. Sometimes, though, you'll need to render content that links internally, which will initiate a full page load rather than a smooth transition. Use the `prismic-content-full` component rather than `prismic-content` to render content in this case:
-
-1. Remove the `require(...Content.vue)` line from `plugins/browser.js`.
-1. Uncomment the `require(...ContentFull.vue)` line from that same file.
-1. Uncomment the `universal.build.extend` function in `nuxt.config.js`.
-
-This will replace links that start with a slash with `nuxt-link` components (so in Prismic, creating a web link to `/news` would result in a seamless transition when clicked). The main downside of this option is a slightly larger build size, since `prismic-content-full` requires the full Vue build to render at runtime.
+By default, this repo uses the `prismic-content` component to handle rendering content from the Prismic WYSIWYG editor, which renders internal and external links automatically. You can pass your own custom HTML serializer to the `html-serializer` prop if you want to override this default behavior.
 
 ## Flow
 
@@ -144,9 +138,9 @@ Adds several slideshow functions and properties. Sets left/right arrow key liste
             return {
                 slides: [
                     /* your slides here */
-                ],
+                ]
             }
-        },
+        }
     }
 </script>
 ```
@@ -181,8 +175,8 @@ Wrapper for a Prismic image. Features:
         computed: {
             myImage() {
                 // return an image from a Prismic content type or slice here
-            },
-        },
+            }
+        }
     }
 </script>
 ```

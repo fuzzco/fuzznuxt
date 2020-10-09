@@ -1,5 +1,6 @@
 <template>
-    <div
+    <component
+        :is="wrapper"
         class="prismic-content"
         v-if="content && content.length"
         v-html="formattedContent"
@@ -7,6 +8,9 @@
 </template>
 
 <script>
+import { RichText } from 'prismic-dom'
+import linkResolver from '~/libs/prismic/linkResolver'
+import defaultHtmlSerializer from '~/libs/prismic/htmlSerializer'
 // import fitvids from 'fitvids'
 
 export default {
@@ -18,13 +22,23 @@ export default {
         asText: {
             type: Boolean,
             default: false
+        },
+        wrapper: {
+            type: String,
+            default: 'div'
+        },
+        htmlSerializer: {
+            type: Function,
+            default: null
         }
     },
     computed: {
         formattedContent() {
             return (
-                this.$prismic[this.asText ? 'asText' : 'asHtml'](
-                    this.content
+                RichText[this.asText ? 'asText' : 'asHtml'](
+                    this.content,
+                    linkResolver,
+                    this.htmlSerializer || defaultHtmlSerializer
                 ) || ''
             )
         }

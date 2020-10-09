@@ -1,7 +1,6 @@
 <template>
     <main class="page">
         <prismic-slices :slices="page.body" />
-        <prismic-content v-if="!$route.params.slug" :content="page.content" />
     </main>
 </template>
 

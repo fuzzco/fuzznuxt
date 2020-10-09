@@ -28,18 +28,15 @@ export default async ({ store, route }, inject) => {
     store.dispatch('browser/LOAD_FONTS')
 
     // global important components
-    Vue.component('a-div', require('~/components/ADiv.vue').default)
-    Vue.component(
-        'prismic-image',
-        require('~/components/prismic/Image.vue').default
-    )
-    Vue.component(
-        'prismic-content',
-        // standard build, no relative links in content
-        require('~/components/prismic/Content.vue').default
-        // full build, relative links in content work correctly
-        // require('~/components/prismic/ContentFull.vue').default
-    )
+    // Vue.component('a-div', require('~/components/ADiv.vue').default)
+    // Vue.component(
+    //     'prismic-image',
+    //     require('~/components/prismic/Image.vue').default
+    // )
+    // Vue.component(
+    //     'prismic-content',
+    //     require('~/components/prismic/Content.vue').default
+    // )
 
     // autoblur
     autoBlur()
