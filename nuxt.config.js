@@ -10,13 +10,9 @@ const universal = {
     build: {
         plugins: [
             new webpack.ProvidePlugin({
-                _get: 'lodash/get',
-            }),
-        ],
-        /** Uncomment this if you need to use the full Vue build */
-        // extend(config) {
-        //     config.resolve.alias['vue'] = 'vue/dist/vue.common'
-        // }
+                _get: 'lodash/get'
+            })
+        ]
     },
 
     target: 'static',
@@ -30,7 +26,7 @@ const universal = {
      * Env variables
      */
     env: {
-        ...process.env,
+        ...process.env
     },
 
     /*
@@ -43,19 +39,19 @@ const universal = {
      */
     head: {
         htmlAttrs: {
-            lang: 'en',
+            lang: 'en'
         },
         title: 'Fuzznuxt',
         meta: [
             { charset: 'utf-8' },
             {
                 name: 'viewport',
-                content: 'width=device-width, initial-scale=1',
-            },
+                content: 'width=device-width, initial-scale=1'
+            }
         ],
         link: [
             { rel: 'icon', href: '/images/favicon.png' },
-            { rel: 'stylesheet', href: '/fonts/fonts.css' },
+            { rel: 'stylesheet', href: '/fonts/fonts.css' }
             // Add for each font in your project
             // {
             //     rel: 'preload',
@@ -66,11 +62,13 @@ const universal = {
         ],
         script: [
             {
-                src: `//static.cdn.prismic.io/prismic.js?repo=${process.env.PRISMIC_REPO_NAME}&new=true`,
+                src: `//static.cdn.prismic.io/prismic.js?repo=${
+                    process.env.PRISMIC_REPO_NAME
+                }&new=true`,
                 async: true,
-                defer: true,
-            },
-        ],
+                defer: true
+            }
+        ]
     },
 
     /*
@@ -85,7 +83,7 @@ const universal = {
         '@nuxtjs/style-resources',
         '@nuxtjs/device',
         '@nuxtjs/component-cache',
-        '@nuxtjs/prismic',
+        '@nuxtjs/prismic'
     ],
 
     /*
@@ -95,31 +93,34 @@ const universal = {
         '~/plugins/bootstrap.server.js',
         '~/plugins/browser.client.js',
         '~/plugins/global-components.js',
+        '~/plugins/prismicLinks.client.js'
     ],
 
     /*
      * Prismic
      */
     prismic: {
-        endpoint: `https://${process.env.PRISMIC_REPO_NAME}.cdn.prismic.io/api/v2`,
+        endpoint: `https://${
+            process.env.PRISMIC_REPO_NAME
+        }.cdn.prismic.io/api/v2`,
         linkResolver: '~/libs/prismic/linkResolver',
         htmlSerializer: '~/libs/prismic/htmlSerializer',
-        components: false,
+        components: false
     },
 
     /*
      * Router
      */
     router: {
-        middleware: ['updateRoute'],
+        middleware: ['updateRoute']
     },
 
     /*
      * Style resources
      */
     styleResources: {
-        scss: ['~/assets/scss/_vars.scss'],
-    },
+        scss: ['~/assets/scss/_vars.scss']
+    }
 }
 
 /*
@@ -130,8 +131,8 @@ const dev = {
      * Webpack build options
      */
     build: {
-        ...universal.build,
-        analyze: true,
+        ...universal.build
+        // analyze: true
     },
 
     /*
@@ -139,8 +140,8 @@ const dev = {
      */
     server: {
         port: 80,
-        host: '0.0.0.0',
-    },
+        host: '0.0.0.0'
+    }
 }
 
 /*
@@ -150,10 +151,10 @@ const prod = {
     /*
      * Server middleware
      */
-    serverMiddleware: ['redirect-ssl'],
+    serverMiddleware: ['redirect-ssl']
 }
 
 module.exports = {
     ...universal,
-    ...(process.env.NODE_ENV === 'development' ? dev : prod),
+    ...(process.env.NODE_ENV === 'development' ? dev : prod)
 }

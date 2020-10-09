@@ -1,6 +1,7 @@
 <template>
     <main class="page">
         <prismic-slices :slices="page.body" />
+        <prismic-content v-if="!$route.params.slug" :content="page.content" />
     </main>
 </template>
 
@@ -16,9 +17,9 @@ export default {
             params && params.slug ? params.slug : 'front-page'
         )
         return {
-            page: doc ? doc.data : null,
+            page: doc ? doc.data : null
         }
-    },
+    }
 }
 
 // if fetchBySlug isn't enough, you can remove the above and use this:

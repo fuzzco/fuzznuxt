@@ -30,9 +30,8 @@ export default {
     computed: {
         formattedContent() {
             return (
-                RichText[this.asText ? 'asText' : 'asHtml'](
-                    this.content,
-                    linkResolver
+                this.$prismic[this.asText ? 'asText' : 'asHtml'](
+                    this.content
                 ) || ''
             )
         }

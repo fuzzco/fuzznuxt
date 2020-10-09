@@ -1,17 +1,17 @@
-import { RichText, Link } from 'prismic-dom'
-import linkResolver from './linkResolver'
+import linkResolver from '~/libs/prismic/linkResolver'
+import prismicDOM from 'prismic-dom'
 
-const Elements = RichText.Elements
+const Elements = prismicDOM.RichText.Elements
 
 export default function(type, element, content, children) {
-    // Generate links to Prismic Documents as <router-link> components
+    // Generate links to Prismic Documents as <nuxt-link> components
     // Present by default, it is recommended to keep this
     if (type === Elements.hyperlink) {
         let result = ''
-        const url = Link.url(element.data, linkResolver)
+        const url = prismicDOM.Link.url(element.data, linkResolver)
 
         if (element.data.link_type === 'Document') {
-            result = `<router-link to="${url}">${content}</router-link>`
+            result = `<a href="${url}" data-nuxt-link>${content}</a>`
         } else {
             const target = element.data.target
                 ? `target="'${element.data.target}'" rel="noopener"`
@@ -28,10 +28,10 @@ export default function(type, element, content, children) {
             ''}" copyright="${element.copyright || ''}">`
 
         if (element.linkTo) {
-            const url = Link.url(element.linkTo, linkResolver)
+            const url = prismicDOM.Link.url(element.linkTo, linkResolver)
 
             if (element.linkTo.link_type === 'Document') {
-                result = `<router-link to="${url}">${result}</router-link>`
+                result = `<nuxt-link to="${url}">${result}</nuxt-link>`
             } else {
                 const target = element.linkTo.target
                     ? `target="${element.linkTo.target}" rel="noopener"`
