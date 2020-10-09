@@ -5,10 +5,10 @@ const resolver = doc => {
         return '/not-found-undefined'
     }
 
-    // parse slug
-    const slug = doc.uid || doc.slug || get(doc, 'slugs[0]') || 'no slug'
+    // parse uid
+    const uid = doc.uid || doc.slug || get(doc, 'slugs[0]', null) || 'no uid'
 
-    return `/${slug}`
+    return `/${uid}`
 }
 
 export default resolver

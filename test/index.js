@@ -29,7 +29,7 @@ const getSlugs = async () => {
 
     const res = await api.query('', { pageSize: 100 })
     const results = get(res, 'results', [])
-    return (slugs = results.map((page) => get(page, 'uid', '')).filter(Boolean))
+    return (slugs = results.map(page => get(page, 'uid', '')).filter(Boolean))
 }
 
 // start server
@@ -77,15 +77,15 @@ const run = async () => {
         // run tests
         try {
             dynConfig = {
-                ...config,
+                ...config
             }
             const url = config.scenarios[0].url + '/'
             slugs
-                .filter((slug) => slug !== 'front-page')
-                .forEach((slug) => {
+                .filter(uid => uid !== 'front-page')
+                .forEach(uid => {
                     dynConfig.scenarios.push({
-                        label: slug,
-                        url: url + slug,
+                        label: uid,
+                        url: url + uid
                     })
                 })
 
@@ -107,7 +107,7 @@ const run = async () => {
                 const raw = await prompts({
                     type: 'text',
                     name: 'approval',
-                    message: 'Approve new versions? (y/N)',
+                    message: 'Approve new versions? (y/N)'
                 })
                 response = raw.approval
             }

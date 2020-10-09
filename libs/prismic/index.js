@@ -9,11 +9,15 @@ export const prismicQuery = async opts => {
         opts = {
             type: 'page',
             uid: '',
-            slug: '',
             pageSize: PRISMIC_MAX_PAGES_PER_QUERY,
             page: 1,
             orderings: '',
             $prismic: this ? this.$prismic : null,
+
+            // 'uid' is preferred to 'slug' but 'slug' is
+            // kept for backwards compatibility
+            slug: '',
+
             ...opts
         }
 
@@ -29,7 +33,7 @@ export const prismicQuery = async opts => {
             opts.$prismic.predicates.at('document.type', opts.type)
         ]
 
-        // if UID or slug was specified
+        // if UID was specified
         if (opts.uid || opts.slug) {
             const result = await api.getByUID(opts.type, opts.uid || opts.slug)
             return result

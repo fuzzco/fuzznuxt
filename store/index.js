@@ -14,7 +14,7 @@ function $prismicError() {
 export const state = () => {
     return {
         pageData: {},
-        description: '',
+        description: ''
     }
 }
 
@@ -30,7 +30,7 @@ export const mutations = {
     },
     SET_BODY_SCROLL: (state, toScroll) => {
         document.body.classList[toScroll ? 'remove' : 'add']('scroll-prevented')
-    },
+    }
 }
 
 export const actions = {
@@ -49,7 +49,7 @@ export const actions = {
             // commit to store
             commit('SET_PAGE_DATA', {
                 key: `${type}`,
-                data,
+                data
             })
             return data
         }
@@ -57,18 +57,18 @@ export const actions = {
         // Not found
         return false
     },
-    FETCH_BY_SLUG: async ({ commit, state }, opts = {}) => {
-        // handle if the user just passed a string for the slug
+    FETCH_BY_UID: async ({ commit, state }, opts = {}) => {
+        // handle if the user just passed a string for the UID
         if (typeof opts === 'string') {
-            opts = { slug: opts }
+            opts = { uid: opts }
         }
 
         // defaults
         opts = {
-            slug: 'front-page',
+            uid: 'front-page',
             type: 'page',
             $prismic: null,
-            ...opts,
+            ...opts
         }
 
         // if no $prismic passed, return error
@@ -78,7 +78,7 @@ export const actions = {
         }
 
         // build key
-        const key = `${opts.type}/${opts.slug}`
+        const key = `${opts.type}/${opts.uid}`
 
         // check if we already have data to return immediately
         if (state.pageData[key]) return state.pageData[key]
@@ -89,7 +89,7 @@ export const actions = {
         if (data) {
             commit('SET_PAGE_DATA', {
                 key,
-                data,
+                data
             })
 
             return data
@@ -97,11 +97,11 @@ export const actions = {
 
         // Not found
         return false
-    },
+    }
 }
 
 export const getters = {
     settings(state) {
         return get(state.pageData.settings, 'data', {})
-    },
+    }
 }
