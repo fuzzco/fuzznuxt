@@ -58,7 +58,8 @@
         "screenfull": "^4.2.0",
         "v-runtime-template": "1.10.0",
         "vue": "2.6.12",
-        "vue-template-compiler": "2.6.12"
+        "vue-template-compiler": "2.6.12",
+        "zenscroll": "4.0.2"
     },
     "devDependencies": {
         "@vue/test-utils": "^1.0.0-beta.27",

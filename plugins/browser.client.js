@@ -6,9 +6,22 @@ import {
     scrollHandler
 } from '~/libs/dom-handlers'
 import Vue from 'vue'
+import Intersect from '~/directives/intersect'
 
 // plugin
 export default async ({ store, route }, inject) => {
+    // Directives
+    Vue.directive('intersect', Intersect)
+
+    // smooth scroll to hash link
+    const zen = require('zenscroll')
+    zen.setup(null, -20)
+    setTimeout(() => {
+        if (route.hash && document.querySelector(route.hash)) {
+            zen.center(document.querySelector(route.hash))
+        }
+    }, 400)
+
     // setup dom listeners
     // ~16ms is 60fps
     window.addEventListener('resize', throttle(() => resizeHandler(store), 16))
