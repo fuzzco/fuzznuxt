@@ -97,6 +97,52 @@ export const actions = {
 
         // Not found
         return false
+    },
+    FETCH_BY_TYPE: async ({ commit, state }, opts = {}) => {
+        // handle if the user just passed a string for the UID
+        if (typeof opts === 'string') {
+            opts = { type: opts }
+        }
+
+        // defaults
+        opts = {
+            type: 'page',
+            $prismic: null,
+            ...opts
+        }
+
+        // remove uid so we get all items of type
+        delete opts.uid
+
+        // if no $prismic passed, return error
+        if (!opts.$prismic) {
+            $prismicError()
+            return null
+        }
+
+        // build key
+        const key = `${opts.type}`
+
+        // query Prismic
+        const data = await prismicQuery(opts)
+
+        if (data) {
+            if (!Array.isArray(data)) {
+                data = [data]
+            }
+
+            for (let item of data) {
+                commit('SET_PAGE_DATA', {
+                    key: `${key}/${item.uid}`,
+                    data: item
+                })
+            }
+
+            return data
+        }
+
+        // Not found
+        return false
     }
 }
 
