@@ -1,3 +1,14 @@
+# make sure degit and prettier are installed
+if ! [ -x "$(command -v degit)" ]; then
+    echo "Fuzznuxt requires degit. Run 'npm install -g degit' to install, then try again."
+    exit 1
+fi
+
+if ! [ -x "$(command -v prettier)" ]; then
+    echo "Fuzznuxt requires prettier. Run 'npm install -g prettier' to install, then try again."
+    exit 1
+fi
+
 # thanks to https://jbonigomes.com/publish-package-to-npx
 npx create-nuxt-app $1
 FUZZCO_BOILERPLATE_DIR="fuzzco-boilerplate"
@@ -39,11 +50,15 @@ echo $ORIGINAL_PACKAGE_JSON > "$1/package.json"
 prettier --write "$1/package.json"
 
 cd "$1"
-atom .
+
+# open atom if we have it
+if [ -x "$(command -v atom)" ]; then
+    atom .
+fi
 
 # install dependencies
 npm i node-sass sass-loader @nuxtjs/style-resources concurrently @babel/core -D
-npm i dotenv fitvids hammerjs js-cookie @fuzzco/font-loader @nuxtjs/component-cache @nuxtjs/device auto-blur cross-fetch lodash popmotion prismic-dom prismic-javascript @nuxtjs/prismic imagesloaded v-runtime-template
+npm i dotenv fitvids hammerjs js-cookie @fuzzco/font-loader @nuxtjs/component-cache @nuxtjs/device auto-blur cross-fetch lodash popmotion prismic-dom prismic-javascript @nuxtjs/prismic imagesloaded v-runtime-template zenscroll
 
 # one final install to make sure everything is ready
 npm i
