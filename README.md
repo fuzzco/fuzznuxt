@@ -213,11 +213,33 @@ Basic usage: `<div v-intersect>...</div>`
 
 #### `v-intersect`
 
-TODO
+Add the `intersected` class on any item in view.
+
+```html
+<!-- `intersected` class added when in view, removed when not in view -->
+<div v-intersect>...</div>
+
+<!-- `intersected` class added permanently on first time in view -->
+<div v-intersect.once>...</div>
+```
 
 #### `v-reverse-hover`
 
-TODO
+Add reverse-hover classes.
+
+```html
+<!-- if any <a> tag is hovered/focused, the <ul> will receive the class `rh-active-within` and the target <a> will receive the class `rh-active` -->
+<ul v-reverse-hover>
+    <li><a href="#one">One</a></li>
+    <li><a href="#two">Two</a></li>
+</ul>
+
+<!-- same as above, just with <button>s instead of <a>s -->
+<ul v-reverse-hover="{ selectors: 'button' }">
+    <li><button>One</button></li>
+    <li><button>Two</button></li>
+</ul>
+```
 
 ## SEO Setup
 
