@@ -151,7 +151,7 @@ const prod = {
     /*
      * Server middleware
      */
-    serverMiddleware: ['redirect-ssl']
+    // serverMiddleware: ['redirect-ssl']
 }
 
 module.exports = {
