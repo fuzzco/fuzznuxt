@@ -221,6 +221,9 @@ Add the `intersected` class on any item in view.
 
 <!-- `intersected` class added permanently on first time in view -->
 <div v-intersect.once>...</div>
+
+<!-- custom event handler - receives args (entries, observer, isIntersecting) -->
+<div v-intersect="{ handler: myCustomMethod }">...</div>
 ```
 
 #### `v-reverse-hover`
