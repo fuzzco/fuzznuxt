@@ -39,7 +39,7 @@ const routes = async () => {
     return new Promise(res =>
         res(
             results
-                .map(page => page.uid)
+                .map(page => `/${page.uid}`)
                 .filter(v => typeof v === 'string')
                 .concat(pagesToAdd)
                 .filter(v => !pagesToSkip.includes(v))
