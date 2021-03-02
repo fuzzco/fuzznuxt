@@ -8,12 +8,14 @@ import {
 import Vue from 'vue'
 import Intersect from '~/directives/intersect'
 import ReverseHover from '~/directives/reverse-hover'
+import PathLength from '~/directives/path-length'
 
 // plugin
 export default async ({ store, route }, inject) => {
     // Directives
     Vue.directive('intersect', Intersect)
     Vue.directive('reverse-hover', ReverseHover)
+    Vue.directive('path-length', PathLength)
 
     // smooth scroll to hash link
     const zen = require('zenscroll')
