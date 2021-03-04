@@ -5,17 +5,17 @@ import {
     resizeHandler,
     scrollHandler
 } from '~/libs/dom-handlers'
-import Vue from 'vue'
-import Intersect from '~/directives/intersect'
-import ReverseHover from '~/directives/reverse-hover'
-import PathLength from '~/directives/path-length'
+// import Vue from 'vue'
+// import Intersect from '~/directives/intersect'
+// import ReverseHover from '~/directives/reverse-hover'
+// import PathLength from '~/directives/path-length'
 
 // plugin
 export default async ({ store, route }, inject) => {
     // Directives
-    Vue.directive('intersect', Intersect)
-    Vue.directive('reverse-hover', ReverseHover)
-    Vue.directive('path-length', PathLength)
+    // Vue.directive('intersect', Intersect)
+    // Vue.directive('reverse-hover', ReverseHover)
+    // Vue.directive('path-length', PathLength)
 
     // smooth scroll to hash link
     const zen = require('zenscroll')
@@ -44,25 +44,15 @@ export default async ({ store, route }, inject) => {
     // load fonts
     store.dispatch('browser/LOAD_FONTS')
 
-    // global important components
-    // Vue.component('a-div', require('~/components/ADiv.vue').default)
-    // Vue.component(
-    //     'prismic-image',
-    //     require('~/components/prismic/Image.vue').default
-    // )
-    // Vue.component(
-    //     'prismic-content',
-    //     require('~/components/prismic/Content.vue').default
-    // )
-
     // autoblur
     autoBlur()
     autoBlur('A')
     autoBlur('SUMMARY')
 
-    // prefers-reduced-motion
+    // prefers-reduced-motion tie-in to store
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     store.commit('browser/SET_PREFERS_REDUCED_MOTION', mediaQuery.matches)
+    // try to update if user changes while the page is open
     if (mediaQuery && mediaQuery.addEventListener) {
         mediaQuery.addEventListener('change', () => {
             store.commit(
@@ -72,5 +62,15 @@ export default async ({ store, route }, inject) => {
         })
     }
 
+    // fetch settings
+    // this should be done already in bootstrap.server.js, but just in case!
+    Promise.all([
+        store.dispatch('FETCH_SINGLETON_TYPE', {
+            type: 'settings',
+            $prismic
+        })
+    ])
+
+    // run resize handler
     resizeHandler(store)
 }
