@@ -17,32 +17,40 @@ export default {
             'page',
             params && params.uid ? params.uid : 'front-page'
         )
-        const page = doc ? doc.data : null
+        const page = doc ? doc.data : { body: [], content: [] }
 
-        // prep SEO
-        const description = get(
+        // prep SEO:
+        // - title
+        const seoTitle = get(
+            page,
+            'seo_title',
+            store.getters.settings.seo_title
+        )
+        // - description
+        const seoDescription = get(
             page,
             'data.seo_description',
             store.getters.settings.seo_description
         )
-        store.commit('SET_DESCRIPTION', description)
+        // (commit our description)
+        store.commit('SET_DESCRIPTION', seoDescription)
+        // - image
+        const seoImage = get(
+            page,
+            'seo_image.Small.url',
+            store.getters.settings.seo_image || {}
+        ).url
 
         // return fetched data and SEO
         return {
             page,
-            seoTitle: get(page, 'seo_title', store.getters.settings.seo_title),
-            seoDescription: description,
-            seoImage: get(
-                page,
-                'seo_image.Small.url',
-                store.getters.settings.seo_image || {}
-            ).url,
+            seoTitle,
+            seoDescription,
+            seoImage,
         }
     },
 }
 </script>
 
 <style lang="scss">
-main.page {
-}
 </style>

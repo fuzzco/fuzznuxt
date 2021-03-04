@@ -4,7 +4,7 @@
 
         <site-header />
         <div class="site-container">
-            <transition name="fade" mode="out-in">
+            <transition name="fade" mode="out-in" @beforeEnter="scrollTop">
                 <nuxt :key="$route.path" />
             </transition>
         </div>
@@ -46,6 +46,12 @@ export default {
                         .prefersReducedMotion,
                 },
             ]
+        },
+    },
+    methods: {
+        // scroll to top before fading in new page
+        scrollTop() {
+            window.scrollTo(0, 0)
         },
     },
 }
