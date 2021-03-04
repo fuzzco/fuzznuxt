@@ -18,7 +18,7 @@ import kebabCase from 'lodash/kebabCase'
 export default {
     data() {
         return {
-            isActive: false
+            isActive: false,
         }
     },
     async mounted() {
@@ -27,7 +27,7 @@ export default {
     },
     components: {
         'site-header': require('~/components/site/header').default,
-        'site-footer': require('~/components/site/footer').default
+        'site-footer': require('~/components/site/footer').default,
     },
     computed: {
         classes() {
@@ -39,11 +39,15 @@ export default {
                 {
                     'mobile-menu-opened':
                         this.$device.isMobileOrTablet &&
-                        this.$store.state.mobileMenuOpened
-                }
+                        this.$store.state.mobileMenuOpened,
+                },
+                {
+                    'prefers-reduced-motion': this.$store.state.browser
+                        .prefersReducedMotion,
+                },
             ]
-        }
-    }
+        },
+    },
 }
 </script>
 
@@ -51,6 +55,11 @@ export default {
 .container {
     display: flex;
     flex-direction: column;
+
+    &.prefers-reduced-motion,
+    &.prefers-reduced-motion * {
+        transition: none !important;
+    }
 
     #description {
         display: none;
