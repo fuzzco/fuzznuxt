@@ -279,25 +279,6 @@ This template uses the following structure in Prismic on the global site setting
 }
 ```
 
-On each page-level component, use the `seo` lib:
-
-```html
-<script>
-    import seo from '~/libs/seo'
-
-    export default {
-        async asyncData(context){
-            const found = // page data that includes data from the above template
-            const fallback = // the site's fallback data includes data from the above template
-            return seo(found, fallback, store)
-            // == { seoTitle, seoDescription, seoImage }
-        }
-    }
-</script>
-```
-
-This will combine with the `head` mixin (`~/mixins/head`) to populate SEO fields for each page.
-
 ## Forms
 
 See our [prismic-form](https://github.com/fuzzco/prismic-form) library for a solution to building forms in Prismic.
