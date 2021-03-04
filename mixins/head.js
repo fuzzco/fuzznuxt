@@ -56,26 +56,13 @@ export default {
     },
     computed: {
         seoDefaultImage() {
-            return (
-                get(
-                    this.$store.state,
-                    'pageData.settings.data.site_image.url'
-                ) || defaultImage
-            )
+            return (this.$store.getters.settings.site_image || {}).url
         },
         seoDefaultDescription() {
-            return (
-                get(
-                    this.$store.state,
-                    'pageData.settings.data.site_description'
-                ) || ''
-            )
+            return this.$store.getters.settings.site_description
         },
         seoDefaultTitle() {
-            return (
-                get(this.$store.state, 'pageData.settings.data.site_title') ||
-                ''
-            )
+            return this.$store.getters.settings.site_title
         },
     },
 }

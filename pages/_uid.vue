@@ -6,20 +6,39 @@
 </template>
 
 <script>
-import seo from '~/libs/seo'
-import { head } from '~/mixins'
+import head from '~/mixins/head'
+import get from 'lodash/get'
 
 export default {
     mixins: [head],
-    async asyncData({ $prismic, error, params }) {
+    async asyncData({ $prismic, params, store }) {
+        // fetch data
         const doc = await $prismic.api.getByUID(
             'page',
             params && params.uid ? params.uid : 'front-page'
         )
+        const page = doc ? doc.data : null
+
+        // prep SEO
+        const description = get(
+            page,
+            'data.seo_description',
+            store.getters.settings.seo_description
+        )
+        store.commit('SET_DESCRIPTION', description)
+
+        // return fetched data and SEO
         return {
-            page: doc ? doc.data : null
+            page,
+            seoTitle: get(page, 'seo_title', store.getters.settings.seo_title),
+            seoDescription: description,
+            seoImage: get(
+                page,
+                'seo_image.Small.url',
+                store.getters.settings.seo_image || {}
+            ).url,
         }
-    }
+    },
 }
 </script>
 
