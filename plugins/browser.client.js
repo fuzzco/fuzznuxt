@@ -11,7 +11,7 @@ import {
 // import PathLength from '~/directives/path-length'
 
 // plugin
-export default async ({ store, route }, inject) => {
+export default async ({ store, route, $prismic }) => {
     // Directives
     // Vue.directive('intersect', Intersect)
     // Vue.directive('reverse-hover', ReverseHover)

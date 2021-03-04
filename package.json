@@ -1,6 +1,6 @@
 {
     "name": "fuzznuxt",
-    "version": "5.2.3",
+    "version": "5.2.4",
     "description": "Fuzzco Nuxt boilerplate.",
     "author": "Fuzzco",
     "bin": {
