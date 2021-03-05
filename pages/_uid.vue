@@ -1,7 +1,7 @@
 <template>
     <main class="page">
-        <prismic-slices :slices="page.body" />
-        <prismic-content :content="page.content" />
+        <prismic-slices :slices="page && page.body ? page.body : []" />
+        <prismic-content :content="page && page.content ? page.content : []" />
     </main>
 </template>
 
