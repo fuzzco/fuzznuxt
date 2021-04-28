@@ -17,7 +17,7 @@ export const state = () => {
         mouseX: 0,
         mouseY: 0,
         observer: null,
-        prefersReducedMotion: true
+        prefersReducedMotion: false
     }
 }
 
