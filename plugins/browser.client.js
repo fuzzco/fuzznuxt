@@ -17,15 +17,6 @@ export default async ({ store, route, $prismic }) => {
     // Vue.directive('reverse-hover', ReverseHover)
     // Vue.directive('path-length', PathLength)
 
-    // smooth scroll to hash link
-    const zen = require('zenscroll')
-    zen.setup(null, -20)
-    setTimeout(() => {
-        if (route.hash && document.querySelector(route.hash)) {
-            zen.center(document.querySelector(route.hash))
-        }
-    }, 400)
-
     // setup dom listeners
     // ~16ms is 60fps
     window.addEventListener('resize', throttle(() => resizeHandler(store), 16))
@@ -60,6 +51,16 @@ export default async ({ store, route, $prismic }) => {
                 mediaQuery.matches
             )
         })
+    }
+
+    // smooth scroll to hash links
+    if (!store.state.browser.prefersReducedMotion) {
+        const zen = require('zenscroll')
+        setTimeout(() => {
+            if (route.hash && document.querySelector(route.hash)) {
+                zen.center(document.querySelector(route.hash))
+            }
+        }, 400)
     }
 
     // fetch settings

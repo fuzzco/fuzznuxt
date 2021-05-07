@@ -4,7 +4,11 @@
         class="a-div"
         :href="href"
         :target="isAbsolute ? '_blank' : '_self'"
+        key="new-tab"
     >
+        <slot />
+    </a>
+    <a v-else-if="isAnchor" class="a-div" :href="href" key="anchor">
         <slot />
     </a>
     <nuxt-link v-else-if="href" class="a-div" :to="href">
@@ -24,8 +28,8 @@ export default {
         replaceWith: { type: String, default: 'div' },
         noNewTab: {
             type: Boolean,
-            default: false
-        }
+            default: false,
+        },
     },
     computed: {
         isAbsolute() {
@@ -34,7 +38,10 @@ export default {
 
             // other links
             return this.href && isRelativeLink.test(this.href)
-        }
-    }
+        },
+        isAnchor() {
+            return `${this.href}`.startsWith('#')
+        },
+    },
 }
 </script>
