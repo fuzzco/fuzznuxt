@@ -1,10 +1,10 @@
 Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) sites.
 
 <details>
-    <summary>Table of Contents</summary>
+    <summary><strong>Table of Contents</strong></summary>
 
 - [Installation](#installation)
-- [Convenctions](#convenctions)
+- [Conventions](#conventions)
 - [Flow](#flow)
 - [Included](#included)
   - [Libs](#libs)
@@ -52,7 +52,16 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
 
 
 
-## Convenctions
+## Conventions
+
+Fuzznuxt is designed to create very flexible Prismic sites that depend almost entirely on [Prismic slices](https://user-guides.prismic.io/en/articles/383933-slices). Usually, the process of building a Fuzznuxt site looks like this:
+
+1. Divide site designs into small, self-contained modules. Take extra care to notice any repeated modules or slight variations in content or presentation - these will become Prismic slices.
+2. Create a new Prismic slice on your Page type for each module from step 1. 
+3. Model each slice's content on Prismic. For example, a section with a custom background color and a variable number of images will have a Color non-repeating field and an Image repeating field.
+4. Run the installation steps on your machine as outlined in [#installation](Installation).
+5. Create a folder called `slice` inside your `components` folder.
+6. Create a new slice component for each slice on your site. Continue until the site is complete.
 
 ## Flow
 
