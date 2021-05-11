@@ -24,6 +24,7 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
       - [Props](#props)
   - [Directives](#directives)
     - [`v-intersect`](#v-intersect)
+    - [`v-path-length`](#v-path-length)
     - [`v-reverse-hover`](#v-reverse-hover)
   - [Scripts](#scripts)
     - [Fonts](#fonts)
@@ -59,7 +60,7 @@ Fuzznuxt is designed to create very flexible Prismic sites that depend almost en
 1. Divide site designs into small, self-contained modules. Take extra care to notice any repeated modules or slight variations in content or presentation - these will become Prismic slices.
 2. Create a new Prismic slice on your Page type for each module from step 1. 
 3. Model each slice's content on Prismic. For example, a section with a custom background color and a variable number of images will have a Color non-repeating field and an Image repeating field.
-4. Run the installation steps on your machine as outlined in [#installation](Installation).
+4. Run the installation steps on your machine as outlined in [Installation](#installation).
 5. Create a folder called `slice` inside your `components` folder.
 6. Create a new slice component for each slice on your site. Continue until the site is complete.
 
@@ -235,6 +236,26 @@ Basic usage: `<div v-intersect>...</div>`
 #### `v-intersect`
 
 Add the `intersected` class on any item in view.
+
+```html
+<!-- `intersected` class added when in view, removed when not in view -->
+<div v-intersect>...</div>
+
+<!-- `intersected` class added permanently on first time in view -->
+<div v-intersect.once>...</div>
+
+<!-- custom event handler - receives args (entries, observer, isIntersecting) -->
+<div v-intersect="{ handler: myCustomMethod }">...</div>
+```
+
+#### `v-path-length`
+
+Attach a CSS var tracking a path's length to an SVG `<path>` element. 
+
+```html
+<!-- path length is available via var(--path-length) on this path element -->
+<path v-path-length d="<M0,0 H10"/>
+```
 
 ```html
 <!-- `intersected` class added when in view, removed when not in view -->
