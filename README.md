@@ -1,22 +1,10 @@
 Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) sites.
 
-## Installation
-
-1. Set up on your machine:
-   1. Make sure you have [Node.js and NPM](https://www.npmjs.com/get-npm) installed.
-   2. In your terminal, navigate ([how?](https://arian-celina.com/windows-cmd-macos-terminal-navigation/)) to where you want your source code to exist.
-   3. Run `npx fuzznuxt your-project-name` - this will create a new directory called `your-project-name` in your current location and set up the boilerplate there. As of May 2021, you should only need to change these options:
-      * **Package Manager:** Select `Npm` instead of `Yarn`
-      * **Deployment target:** Select `Static (Static/Jamstack hosting)` instead of `Server (Node.js hosting)`
-   4. Run `cd your-project-name`, then `npm run dev`, to navigate to your new project and run the development server.
-2. Set up Prismic:
-    1. **Pages**: Create a repeatable custom type called `page` with the a UID field called `UID`. 
-    2. Create a Page with the UID `front-page`. This is the content that will appear on `pages/index.vue`
-    3. **Settings**: Create a single custom type called `settings`. This is the content that will be used for global site settings.
-    4. **Previews**: Make a new preview with the name `production`, add your Netlify domain, and set the link resolver to `/preview`. 
-       * For more advanced site structures, you may need to ensure `libs/prismic/linkResolver.js` (the [link resolver](https://prismic.io/docs/technologies/link-resolver-javascript)) makes sense with your site structure, but you can disregard that at the start of the project.
+<details>
+    <summary>Table of Contents</summary>
 
 - [Installation](#installation)
+- [Convenctions](#convenctions)
 - [Flow](#flow)
 - [Included](#included)
   - [Libs](#libs)
@@ -44,7 +32,27 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
 - [Deployment](#deployment)
   - [Netlify](#netlify)
   - [Heroku](#heroku)
+</details>
 
+## Installation
+
+1. Set up on your machine:
+   1. Make sure you have [Node.js and NPM](https://www.npmjs.com/get-npm) installed.
+   2. In your terminal, navigate ([how?](https://arian-celina.com/windows-cmd-macos-terminal-navigation/)) to where you want your source code to exist.
+   3. Run `npx fuzznuxt your-project-name` - this will create a new directory called `your-project-name` in your current location and set up the boilerplate there. As of May 2021, you should only need to change these options:
+      * **Package Manager:** Select `Npm` instead of `Yarn`
+      * **Deployment target:** Select `Static (Static/Jamstack hosting)` instead of `Server (Node.js hosting)`
+   4. Run `cd your-project-name`, then `npm run dev`, to navigate to your new project and run the development server.
+2. Set up Prismic:
+    1. **Pages**: Create a repeatable custom type called `page` with the a UID field called `UID`. 
+    2. Create a Page with the UID `front-page`. This is the content that will appear on `pages/index.vue`
+    3. **Settings**: Create a single custom type called `settings`. This is the content that will be used for global site settings.
+    4. **Previews**: Make a new preview with the name `production`, add your Netlify domain, and set the link resolver to `/preview`. 
+       * For more advanced site structures, you may need to ensure `libs/prismic/linkResolver.js` (the [link resolver](https://prismic.io/docs/technologies/link-resolver-javascript)) makes sense with your site structure, but you can disregard that at the start of the project.
+
+
+
+## Convenctions
 
 ## Flow
 
