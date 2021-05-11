@@ -62,3 +62,14 @@ npm i dotenv fitvids hammerjs js-cookie @fuzzco/font-loader @nuxtjs/component-ca
 
 # one final install to make sure everything is ready
 npm i
+
+# ask prismic repo name and add to .env
+# https://stackoverflow.com/a/5947802/3856675
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+printf "${GREEN}Your Prismic repo name: ${NC}"
+read PRISMIC_REPO_NAME
+echo "PRISMIC_REPO_NAME=${PRISMIC_REPO_NAME}" > .env
+
+echo "\n\n${GREEN}Setup complete! Run:${NC}\n\ncd $1\nnpm run dev\n\n${GREEN}to start developing.${NC}"
