@@ -1,35 +1,4 @@
-# Fuzznuxt
-
 Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) sites.
-
-- [Fuzznuxt](#fuzznuxt)
-  - [Installation](#installation)
-    - [Fonts](#fonts)
-    - [`prismic-content`](#prismic-content)
-  - [Flow](#flow)
-  - [Included](#included)
-    - [Libs](#libs)
-      - [Prismic](#prismic)
-      - [SEO](#seo)
-      - [Utilities](#utilities)
-    - [Mixins](#mixins)
-      - [Head](#head)
-      - [Hovering](#hovering)
-      - [Observe](#observe)
-      - [prisImg](#prisimg)
-      - [Rect](#rect)
-      - [Slideshow](#slideshow)
-    - [Components](#components)
-      - [`prismic-image`](#prismic-image)
-        - [Props](#props)
-    - [Directives](#directives)
-      - [`v-intersect`](#v-intersect)
-      - [`v-reverse-hover`](#v-reverse-hover)
-  - [SEO Setup](#seo-setup)
-  - [Forms](#forms)
-  - [Deployment](#deployment)
-    - [Netlify](#netlify)
-    - [Heroku](#heroku)
 
 ## Installation
 
@@ -47,18 +16,35 @@ Fuzzco Nuxt boilerplate. Designed for use with [Prismic](https://prismic.io/) si
     4. **Previews**: Make a new preview with the name `production`, add your Netlify domain, and set the link resolver to `/preview`. 
        * For more advanced site structures, you may need to ensure `libs/prismic/linkResolver.js` (the [link resolver](https://prismic.io/docs/technologies/link-resolver-javascript)) makes sense with your site structure, but you can disregard that at the start of the project.
 
-### Fonts
+- [Installation](#installation)
+- [Flow](#flow)
+- [Included](#included)
+  - [Libs](#libs)
+    - [Prismic](#prismic)
+    - [SEO](#seo)
+    - [Utilities](#utilities)
+  - [Mixins](#mixins)
+    - [Head](#head)
+    - [Hovering](#hovering)
+    - [Observe](#observe)
+    - [prisImg](#prisimg)
+    - [Rect](#rect)
+    - [Slideshow](#slideshow)
+  - [Components](#components)
+    - [`prismic-content`](#prismic-content)
+    - [`prismic-image`](#prismic-image)
+      - [Props](#props)
+  - [Directives](#directives)
+    - [`v-intersect`](#v-intersect)
+    - [`v-reverse-hover`](#v-reverse-hover)
+  - [Scripts](#scripts)
+    - [Fonts](#fonts)
+- [SEO Setup](#seo-setup)
+- [Forms](#forms)
+- [Deployment](#deployment)
+  - [Netlify](#netlify)
+  - [Heroku](#heroku)
 
-Fuzznuxt comes with a script to make font preparation easier.
-
-1. Select all formats, then drag and drop all fonts you want on your site to the uploader on [onlinefontconverter](https://onlinefontconverter.com).
-1. Select "Download all attachments".
-1. Drag the downloaded `arcive.zip` to the root directory of your Fuzznuxt project.
-1. Run `npm run fonts`. This will execute `bash/fonts.sh`, which will unzip and organize the fonts from the `arcive.zip` file into the `static/fonts` folder and remove the `arcive.zip` file.
-
-### `prismic-content`
-
-By default, this repo uses the `prismic-content` component to handle rendering content from the Prismic WYSIWYG editor, which renders internal and external links automatically. You can pass your own custom HTML serializer to the `html-serializer` prop if you want to override this default behavior.
 
 ## Flow
 
@@ -66,7 +52,7 @@ The first thing to run in the template is `plugins/bootstrap.js` - this will be 
 
 `plugins/browser.js` runs next. Usually, outside components and browser-dependent events (window resizing, font loading, etc) are registered here, but it's possible to set up anything you want guaranteed to run client-side in this script.
 
-From there, Nuxt's normal [layout](https://nuxtjs.org/api/pages-layout/) and [page](https://nuxtjs.org/guide/views#pages) rules apply. There are **two notable exceptions:**
+From there, Nuxt's normal [layout](https://nuxtjs.org/api/pages-layout/) and [page](https://nuxtjs.org/guide/views#pages) rules apply, with these as the only exceptions:
 
 -   `_vars.scss`: Thanks to the [style-resources-module](https://github.com/nuxt-community/style-resources-module), the contents of `assets/scss/_vars.scss` will automatically be `@include`d in every Vue component on the site.
 
@@ -171,6 +157,11 @@ Adds several slideshow functions and properties. Sets left/right arrow key liste
 
 Import and use any of the following components included with the boilerplate.
 
+#### `prismic-content`
+
+By default, this repo uses the `prismic-content` component to handle rendering content from the Prismic WYSIWYG editor, which renders internal and external links automatically. You can pass your own custom HTML serializer to the `html-serializer` prop if you want to override this default behavior.
+
+
 #### `prismic-image`
 
 Wrapper for a Prismic image. Features:
@@ -216,6 +207,8 @@ Wrapper for a Prismic image. Features:
 | url           | String         | `''`                           | URL for the image. Usually handled by Prismic and `v-bind`.                                                                                                                                                           |
 | wrapper       | String         | `div`                          | The outermost element wrapping the `prismic-image`.                                                                                                                                                                   |
 
+
+
 ### Directives
 
 The following directives are included in the boilerplate.
@@ -255,9 +248,21 @@ Add reverse-hover classes.
 </ul>
 ```
 
+### Scripts
+
+#### Fonts
+
+Fuzznuxt comes with a script to make font preparation easier.
+
+1. Select all formats, then drag and drop all fonts you want on your site to the uploader on [onlinefontconverter](https://onlinefontconverter.com).
+1. Select "Download all attachments".
+1. Drag the downloaded `arcive.zip` to the root directory of your Fuzznuxt project.
+1. Run `npm run fonts`. This will execute `bash/fonts.sh`, which will unzip and organize the fonts from the `arcive.zip` file into the `static/fonts` folder and remove the `arcive.zip` file.
+
+
 ## SEO Setup
 
-This template uses the following structure in Prismic on the global site settings and each custom page type:
+This template uses a special structure in Prismic on the global site settings and each custom page type. To install, copy the following JSON to the JSON editor on your Prismic `Setting` and `Page` types, after the `Main` sidebar on each one:
 
 ```
 "SEO" : {
