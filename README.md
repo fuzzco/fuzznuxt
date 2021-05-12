@@ -86,7 +86,7 @@ Contains several helper functions for serializing data from Prismic. Most of the
 
 #### SEO
 
-See [SEO](#seo) below.
+See [SEO](#seo-setup) below.
 
 #### Utilities
 
