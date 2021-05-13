@@ -1,8 +1,8 @@
 export default {
     head() {
-        const defaultTitle = this.$store.getters.settings.seo_title
-        const defaultDescription = this.$store.getters.settings.site_description
-        const defaultImage = (this.$store.getters.settings.site_image || {}).url
+        const defaultTitle = this.$store.getters.settings.seo_title || ''
+        const defaultDescription = this.$store.getters.settings.site_description || ''
+        const defaultImage = (this.$store.getters.settings.site_image || {}).url || ''
 
         return {
             title: this.seoTitle || this.$store.getters.settings.seo_title,
