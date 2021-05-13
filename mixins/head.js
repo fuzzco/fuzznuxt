@@ -1,30 +1,31 @@
-import get from 'lodash/get'
-const defaultImage = 'URL OF FALLBACK IMAGE FROM STATIC FOLDER HERE'
-
 export default {
     head() {
+        const defaultTitle = this.$store.getters.settings.seo_title
+        const defaultDescription = this.$store.getters.settings.site_description
+        const defaultImage = (this.$store.getters.settings.site_image || {}).url
+
         return {
-            title: this.seoTitle || this.seoDefaultTitle,
+            title: this.seoTitle || this.$store.getters.settings.seo_title,
             meta: [
                 {
                     hid: 'description',
                     name: 'description',
-                    content: this.seoDescription || this.seoDefaultDescription,
+                    content: this.seoDescription || defaultDescription,
                 },
                 {
                     hid: 'og:description',
                     property: 'og:description',
-                    content: this.seoDescription || this.seoDefaultDescription,
+                    content: this.seoDescription || defaultDescription,
                 },
                 {
                     hid: 'og:image',
                     property: 'og:image',
-                    content: this.seoImage || this.seoDefaultImage,
+                    content: this.seoImage || defaultImage,
                 },
                 {
                     hid: 'og:title',
                     property: 'og:title',
-                    content: this.seoTitle || this.seoDefaultTitle,
+                    content: this.seoTitle || defaultTitle,
                 },
                 {
                     hid: 'og:type',
@@ -34,17 +35,17 @@ export default {
                 {
                     hid: 'twitter:description',
                     name: 'twitter:description',
-                    content: this.seoDescription || this.seoDefaultDescription,
+                    content: this.seoDescription || defaultDescription,
                 },
                 {
                     hid: 'twitter:title',
                     name: 'twitter:title',
-                    content: this.seoTitle || this.seoDefaultTitle,
+                    content: this.seoTitle || defaultTitle,
                 },
                 {
                     hid: 'twitter:image',
                     name: 'twitter:image',
-                    content: this.seoImage || this.seoDefaultImage,
+                    content: this.seoImage || defaultImage,
                 },
                 {
                     hid: 'twitter:card',
@@ -53,16 +54,5 @@ export default {
                 },
             ],
         }
-    },
-    computed: {
-        seoDefaultImage() {
-            return (this.$store.getters.settings.site_image || {}).url
-        },
-        seoDefaultDescription() {
-            return this.$store.getters.settings.site_description
-        },
-        seoDefaultTitle() {
-            return this.$store.getters.settings.site_title
-        },
     },
 }
